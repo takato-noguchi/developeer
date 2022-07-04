@@ -1,4 +1,4 @@
-# 本番環境
+# 開発環境
 
 """
 Django settings for config project.
@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
-    'chat.apps.ChatConfig',
     'imagekit',
 ]
 

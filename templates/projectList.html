@@ -86,7 +86,7 @@
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">プロジェクト一覧</h1>
         <p class="lead text-muted">各言語・フレームワークを使った、チーム開発のプロジェクトがあります。チーム開発のプロジェクトに参加してみましょう。自分で始めることも可能です。</p>
-        <a href="#" class="btn btn-primary my-2">プロジェクトをはじめる</a>
+        <a href="http://localhost:8000/start/" class="btn btn-primary my-2">プロジェクトをはじめる</a>
       </div>
     </div>
   </section>
@@ -97,13 +97,14 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
+            {% for item in object_list %}
             <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="https://i.gyazo.com/eabde90883895866ecea71646be5397c.png" role="img"  preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
             <div class="card-body">
               <img src="https://i.gyazo.com/2aa1226bc3159c010b4f25dceb11679b.png" class="user-icon">
-              <p class="card-text">Ruby on Railsでチーム開発をしてみよう</p>
+              <p class="card-text">{{ item.title }}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href=''>
+                    <a href='{% url 'project' item.pk %}'>
                       <button type="button" class="btn btn-primary">
                           詳細を見る
                        </button>
@@ -112,6 +113,7 @@
               </div>
             </div>
           </div>
+          {% endfor %}
         </div>
         <div class="col">
           <div class="card shadow-sm">

@@ -40,11 +40,8 @@
         }
       }
     </style>
-
-    
   </head>
   <body>
-    
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
@@ -58,12 +55,12 @@
           <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link active" href="#">プロジェクトをさがす
+                <a class="nav-link active" href="http://localhost:8000/project/">プロジェクトをさがす
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">プロジェクトをはじめる
+                <a class="nav-link active" href="http://localhost:8000/start/">プロジェクトをはじめる
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
@@ -77,6 +74,9 @@
               <button class="btn btn-primary my-2 my-sm-0" type="submit">ログイン</button>
               <button class="btn btn-primary my-2 my-sm-0" type="submit">登録</button>
             </form>
+            <a href="http://localhost:8000/profile/">
+              <img src="../media/avatars/default_icon.png" class="user-icon">
+            </a>
           </div>
         </div>
       </nav>
@@ -95,16 +95,18 @@
   <div class="album py-5 bg-light">
     <div class="container">
 
+      <!-- Djagno テンプレートを使用する -->
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-            <img src="https://i.gyazo.com/18770b4bf74c41b6c3a702ae9a2f62e9.png" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
 
+            {% for item in object_list %}
+            <img src= {{ item.img }} class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
             <div class="card-body">
-              <p class="card-text">Git/GitHubを学習して、チーム開発に必要な前提知識を身に着けよう</p>
+              <p class="card-text">{{ item.title }}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href=''>
+                    <a href="{% url 'course' item.pk %}">
                       <button type="button" class="btn btn-primary">
                           詳細を見る
                        </button>
@@ -113,7 +115,10 @@
               </div>
             </div>
           </div>
+          {% endfor %}
         </div>
+
+
         <div class="col">
           <div class="card shadow-sm">
             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Coming Soon...</text></svg>
@@ -177,3 +182,14 @@
     </div>
   </div>
 </footer>
+
+
+<style>
+.user-icon {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1.5px solid #eee;
+}
+</style>

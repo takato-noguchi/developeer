@@ -1,19 +1,108 @@
-{% block content %}
-<div class="container">
-    <h1>ログインする</h1>
+<div class="form-wrapper">
+    <h1>ログイン</h1>
     <form action="" method="POST">
+      <div calss="form-item">
         {% csrf_token %}
         {{ form.non_field_errors }}
         {% for field in form %}
+        <div class="form-item">
             {{ field.label }}
             <br>
             {{ field }}
             <br>
+        </div>
             {{ field.error }}
         {% endfor %}
         <br>
-        <button type="submit">ログイン</button>
+      </div>
+      <div class="button-panel">
+        <button class="btn-login" type="submit">ログインする</button>
+      </div>
     </form>
+    <div class="form-footer">
+        <p><a href="http://localhost:8000/signup/">新規登録はこちらから</a></p>
+        <p><a href="http://localhost:8000/forget/">パスワードを忘れた方</a></p>
+    </div>
 </div>
-{% endblock %}
 
+<style>
+form {
+  padding: 0 1.5em;
+}
+
+/* Form Layout */
+.form-wrapper {
+  background: #fafafa;
+  margin: 3em auto;
+  padding: 0 1em;
+  max-width: 370px;
+}
+
+h1 {
+  text-align: center;
+  padding: 1em 0;
+}
+
+form {
+  padding: 0 1.5em;
+}
+
+.form-item {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
+
+.form-item input {
+  background: #fafafa;
+  border: none;
+  border-bottom: 2px solid #e9e9e9;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  height: 50px;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.form-item input:focus {
+  border-bottom: 2px solid #c0c0c0;
+  outline: none;
+}
+
+.btn-login {
+    padding: 5px 35px 5px 35px;
+    margin-left: 80px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: #4169e1;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.btn-login:hover {
+    background-color: #1e90ff;
+}
+
+.button-panel {
+  margin: 2em 0 0;
+  width: 100%;
+}
+
+.form-footer {
+  font-size: 1em;
+  padding: 2em 0;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #8c8c8c;
+  text-decoration: none;
+  transition: border-color 0.3s;
+}
+
+.form-footer a:hover {
+  border-bottom: 1px dotted #8c8c8c;
+}
+</style>
+ 

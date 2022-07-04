@@ -48,22 +48,22 @@
   <body>
     
 <div class="col-lg-8 mx-auto p-3 py-md-5">
+  {% for item in object_list %}
   <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
-    <span class="fs-4">Git/GitHubで学ぶチーム開発入門</span>
+    <span class="fs-4">{{ item.title }}</span>
   </header>
 
   <main>
-    <p class="fs-5 col-md-8">Git/GitHubを学習して、チーム開発に必要な基礎力をつけよう。</p>
+    <p class="fs-5 col-md-8">{{ item.description }}</p>
     <div class="mb-5">
-      <a href="https://app.gitbook.com/s/ZsJ3BWSXOGRLU5y1aRmg/" class="btn btn-primary btn-lg px-4">学習する</a>
+      <a href="{{ item.img }}" class="btn btn-primary btn-lg px-4">学習する</a>
     </div>
-
+  {% endfor %}
     <hr class="col-3 col-md-2 mb-5">
-
     <div class="row g-5">
       <div class="col-md-6">
         <ul class="icon-list">
-          <li><a href="https://github.com/twbs/bootstrap-npm-starter" rel="noopener" target="_blank">Bootstrap npm starter</a></li>
+          <a href="http://localhost:8000/course/" rel="noopener">コース一覧へ</a>
         </ul>
       </div>
     </div>

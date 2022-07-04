@@ -67,6 +67,8 @@ class Profile(models.Model):
         settings.AUTH_USER_MODEL, related_name= 'userProfile',
         on_delete= models.CASCADE
     )
+    selfIntro = models.CharField(max_length=100, default="")
+    github_url = models.URLField(default="")
     created_at = models.DateField(auto_now_add=True)
     img = models.ImageField(blank=True, null=True, upload_to=upload_img_path)
     img_thumbnail = ImageSpecField(source='img', processors=[ResizeToFill(225, 225)],)
@@ -101,6 +103,7 @@ class Project(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=20)
     subtitle = models.CharField(max_length=50)
+    language_category = models.CharField(max_length=50, default="")
     userProject = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name= 'project',
         on_delete= models.CASCADE
