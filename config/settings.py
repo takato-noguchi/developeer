@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'chat.apps.ChatConfig',
     'imagekit',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +75,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+# Chat
+ASGI_APPLICATION = 'config.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': { 'hosts': [('127.0.0.1', 6379)], },
+    },
+}
 
 
 # Database

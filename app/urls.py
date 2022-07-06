@@ -8,7 +8,7 @@ urlpatterns = [
     path('course/<int:pk>', CourseDetailView.as_view(), name="course"),
     path('project/', ProjectListView.as_view()),
     path('project/(?P<pk>[0-9]+)', ProjectDetailView.as_view(), name="project"),
-    path('start/', ProjectStartView.as_view()),
+    path('readyfor/', ProjectStartView.as_view()),
     path('profile/', ProfileView.as_view()),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
