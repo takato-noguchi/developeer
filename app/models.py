@@ -1,5 +1,5 @@
-from pyexpat import model
-from re import T
+from email.policy import default
+from unittest import defaultTestLoader
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.conf import settings
@@ -9,7 +9,7 @@ import uuid
 
 def upload_img_path(instance, filename):
     ext = filename.split('.')[-1]
-    return '/'.join(['avatars', str(instance.userProfile.id)+str(instance.nickName)+str(".")+(ext)])
+    return '/'.join(['avatars', str(instance.id)+str(instance.email)+str(".")+(ext)])
 
 def upload_course_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -45,6 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     username = models.CharField(max_length=50, unique=False, default='')
     email = models.EmailField(max_length=50, unique=True)
+    img = models.ImageField(blank=True, null=True, default="", upload_to=upload_img_path)
+    img_thumbnail = ImageSpecField(source='img', processors=[ResizeToFill(225, 225)],)
     last_login = models.DateField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

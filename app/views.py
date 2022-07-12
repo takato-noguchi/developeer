@@ -1,3 +1,4 @@
+from dataclasses import field
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -53,6 +54,7 @@ class ProjectStartView(CreateView):
     model = Project
     success_url = reverse_lazy('/')
 
-class ProfileView(ListView):
+class ProfileCreateView(CreateView):
     template_name = 'profile.html'
+    fields = ('nickName', 'selfIntro', 'github_url', 'img')
     model = Profile

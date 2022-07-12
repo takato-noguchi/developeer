@@ -1,171 +1,67 @@
-<!doctype html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.83.1">
-    <title>Developeer</title>
+{% extends 'base.html' %}
+{% block main %}
+<main>
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">
+        プロジェクト一覧
+      </h1>
+      <p class="lead text-muted">各言語・フレームワークを使った、チーム開発のプロジェクトがあります。チーム開発のプロジェクトに参加してみましょう。自分で始めることも可能です。</p>
+      <a href="http://localhost:8000/readyfor/" class="btn btn-primary my-2">プロジェクトをはじめる</a>
+    </div>
+  </div>
+</section>
 
-    <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/album/">
-
-    <!-- Bootstrap core CSS -->
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <!-- Favicons -->
-<link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
-<meta name="theme-color" content="#7952b3">
-
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-    
-  </head>
-  <body>
-    
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/">
-            <strong>developeer</strong>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      
-          <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">プロジェクトをはじめる
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">コース一覧
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">developeerとは
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-            </ul>
-            <form class="d-flex">
-              <button class="btn btn-primary my-2 my-sm-0" type="submit">ログイン</button>
-              <button class="btn btn-primary my-2 my-sm-0" type="submit">登録</button>
-            </form>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col">
+        <div class="card shadow-sm">
+          {% for item in object_list %}
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="https://i.gyazo.com/eabde90883895866ecea71646be5397c.png" role="img"  preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
+          <div class="card-body">
+            <img src="https://i.gyazo.com/2aa1226bc3159c010b4f25dceb11679b.png" class="user-icon">
+            <p class="card-text">{{ item.title }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href='{% url 'project' item.pk %}'>
+                    <button type="button" class="btn btn-primary">
+                        詳しく見る
+                      </button>
+                  </a>
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
-</header>
-
-<main>
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">
-          プロジェクト一覧
-        </h1>
-        <p class="lead text-muted">各言語・フレームワークを使った、チーム開発のプロジェクトがあります。チーム開発のプロジェクトに参加してみましょう。自分で始めることも可能です。</p>
-        <a href="http://localhost:8000/readyfor/" class="btn btn-primary my-2">プロジェクトをはじめる</a>
+        {% endfor %}
       </div>
-    </div>
-  </section>
+      <div class="col">
+        <div class="card shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Coming Soon...</text></svg>
 
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            {% for item in object_list %}
-            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="https://i.gyazo.com/eabde90883895866ecea71646be5397c.png" role="img"  preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
-            <div class="card-body">
-              <img src="https://i.gyazo.com/2aa1226bc3159c010b4f25dceb11679b.png" class="user-icon">
-              <p class="card-text">{{ item.title }}</p>
+          <div class="card-body">
+            <img src="../media/avatars/default_icon.png" class="user-icon">
+            <p class="card-text">ご自身で、やりたいプロジェクトを作成することができます</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href='{% url 'project' item.pk %}'>
-                      <button type="button" class="btn btn-primary">
-                          詳細を見る
-                       </button>
-                    </a>
+                  <a href=''>
+                    <button type="button" class="btn btn-primary">
+                      詳しく見る
+                      </button>
+                  </a>
                 </div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Coming Soon...</text></svg>
-
-            <div class="card-body">
-              <img src="../media/avatars/default_icon.png" class="user-icon">
-              <p class="card-text">ご自身で、やりたいプロジェクトを作成することができます</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href=''>
-                      <button type="button" class="btn btn-primary">
-                        詳細を見る
-                       </button>
-                    </a>
-                  </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+</div>
 </main>
+{% endblock main %}
 
-<footer class="text-muted py-5">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-    <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.0/getting-started/introduction/">getting started guide</a>.</p>
-  </div>
-</footer>
-
-
-    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-      
-  </body>
-</html>
-
-<style type="text/css">
-.user-icon {
-  height: 50px;
-  width: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1.5px solid #eee;
-}
+<style>
 
 .project-list {
   margin-left: 80px;

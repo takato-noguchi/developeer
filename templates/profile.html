@@ -1,4 +1,5 @@
-<div class="profile">
+<form action="" method="POST" enctype="multipart/form-data">{% csrf_token%}
+  <div class="profile">
     <h1>プロフィール編集</h1>
     <div class="Form-Item">
       <p class="Form-Item-Label">
@@ -18,14 +19,14 @@
     </div>
     <div class="Form-Item">
       <p class="Form-Item-Label">GitHub URL</p>
-      <input type="email" class="Form-Item-Input" placeholder="https://github.com">
+      <input type="url" class="Form-Item-Input" placeholder="https://github.com">
     </div>
     <input type="submit" class="Form-Btn" value="保存する">
-</div>
-  
-  
+  </div>
+</form>
+
 <style>
-  .profile {
+.profile {
   margin-top: 80px;
   margin-left: auto;
   margin-right: auto;
