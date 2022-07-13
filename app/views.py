@@ -1,6 +1,7 @@
 from dataclasses import field
+from re import template
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Profile, Project, Course, User
@@ -58,3 +59,16 @@ class ProfileCreateView(CreateView):
     template_name = 'profile.html'
     fields = ('nickName', 'selfIntro', 'github_url', 'img')
     model = Profile
+
+class AccountView(ListView):
+    template_name = 'account.html'
+    model = User
+
+class AccountDeleteView(DeleteView):
+    template_name = 'account.html'
+    model = User
+
+class AccountPasswordView(UpdateView):
+    template_name = 'account.html'
+    model = User
+
