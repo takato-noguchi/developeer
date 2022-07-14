@@ -48,22 +48,20 @@
   <body>
     
 <div class="col-lg-8 mx-auto p-3 py-md-5">
-  {% for item in object_list %}
   <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
-    <span class="fs-4">{{ item.title }}</span>
+    <span class="fs-4">{{ course.title }}</span>
   </header>
 
   <main>
-    <p class="fs-5 col-md-8">{{ item.description }}</p>
+    <p class="fs-5 col-md-8">{{ course.description }}</p>
     <div class="mb-5">
-      <a href="{{ item.img }}" class="btn btn-primary btn-lg px-4">学習する</a>
+      <a href="{{ course.content }}" class="btn btn-primary btn-lg px-4">学習する</a>
     </div>
-  {% endfor %}
     <hr class="col-3 col-md-2 mb-5">
     <div class="row g-5">
       <div class="col-md-6">
         <ul class="icon-list">
-          <a href="http://localhost:8000/course/" rel="noopener">コース一覧へ</a>
+          <a href="http://localhost:8000/course/" rel="noopener" class="back-course">« コース一覧へ</a>
         </ul>
       </div>
     </div>
@@ -80,3 +78,13 @@
       
   </body>
 </html>
+
+<style>
+.back-course {
+    text-decoration: none;
+}
+
+.back-course:hover {
+    text-decoration: underline;
+}
+</style>

@@ -1,4 +1,4 @@
-<div class="Form">
+<form action="" method="POST" enctype="multipart/form-data" class="Form">{% csrf_token%}
   <h1>プロジェクト内容</h1>
   <p>
     <a class="project-question" href="">プロジェクトの作り方</a>
@@ -7,7 +7,7 @@
     <p class="Form-Item-Label">
       <span class="Form-Item-Label-Required">必須</span>タイトル
     </p>
-    <input type="text" class="Form-Item-Input" placeholder="(例)Ruby on RailsでSNSを作ります">
+    <input type="text" class="Form-Item-Input" placeholder="(例)Ruby on RailsでSNSアプリを作ります">
   </div>
   <div class="Form-Item">
     <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>サムネイル画像</p>
@@ -22,8 +22,7 @@
     <textarea class="Form-Item-Textarea" placeholder="(例)Ruby on RailsでSNSアプリを作ります。インフラにはAWSとDockerを使います。"></textarea>
   </div>
   <input type="submit" class="Form-Btn" value="プロジェクトを作成する">
-</div>
-
+</form>
 
 <style>
   .Form {
