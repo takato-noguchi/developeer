@@ -9,7 +9,11 @@
         <p class="lead text-muted">プログラミングを独学していても、なかなか実務ではたらける力は身につかない。developeerはエンジニア同士をつなげ、チーム開発経験を積む場所を提供します。</p>
         <p>
           <a href="https://www.notion.so/developeer-f35963e4bf764e5b93084d832af5a595" class="btn btn-primary my-2">developeerとは</a>
-          <a href="signup/" class="btn btn-secondary my-2">アカウントを作成</a>
+          {% if user.is_authenticated %}
+          <a href="{% url 'projectlist' %}" class="btn btn-secondary my-2">プロジェクトをさがす</a>
+          {% else%}
+          <a href="{% url 'signup' %}" class="btn btn-secondary my-2">アカウントを作成</a>
+          {% endif %}
         </p>
       </div>
     </div>
@@ -28,7 +32,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 page-hide">
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="https://i.gyazo.com/c2e5be03ea078d4e7f9b2a8d568e358d.png" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
 
             <div class="card-body">
               <p class="card-text">developeerのサービス開発に参加しよう</p>
@@ -47,7 +51,7 @@
 
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="https://i.gyazo.com/431f1d7a6900f83fd6762404b94c7145.png" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
 
             <div class="card-body">
               <p class="card-text">RailsでSNSアプリをチーム開発しよう</p>
@@ -66,10 +70,10 @@
 
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="https://i.gyazo.com/6d9256ed41fd5d687e6af0dd2e67e4de.png" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
 
             <div class="card-body">
-              <p class="card-text">ReactでInstagramを作成してみよう</p>
+              <p class="card-text">ReactでBlogサイトをチーム開発</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <a href=''>
@@ -117,9 +121,15 @@
       <div class="row py-lg-5 bg-light intro-account">
         <div class="col-lg-6 col-md-8 mx-auto">
           <h3 class="fw-light">developeerを使って、チーム開発を始めましょう</h3>
+          {% if user.is_authenticated %}
           <p>
-            <a href="signup/" class="btn btn-primary my-2">アカウントを作成する</a>
+            <a href="{% url 'readyfor' %}" class="btn btn-primary my-2">プロジェクトをはじめる</a>
           </p>
+          {% else %}
+          <p>
+            <a href="{% url 'signup' %}" class="btn btn-primary my-2">アカウントを作成する</a>
+          </p>
+          {% endif %}
         </div>
       </div>
     </div>

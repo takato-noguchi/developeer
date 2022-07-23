@@ -1,4 +1,4 @@
-# 本番環境
+# ローカル環境
 
 """
 Django settings for config project.
@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from pathlib import Path
 from telnetlib import LOGOUT
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -40,10 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.apps.AppConfig',
-    'chat.apps.ChatConfig',
+    'app',
+    'chat',
+    'admin',
     'imagekit',
     'channels',
+    "bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -135,9 +138,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / Path("static")
+]
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

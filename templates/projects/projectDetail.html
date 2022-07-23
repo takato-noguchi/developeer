@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>Developeer</title>
+    <title>Developeer - チーム開発のマッチングサービス</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/starter-template/">
 
@@ -22,6 +22,7 @@
 <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
 <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
 <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+<link rel="shortcut icon" href="https://i.gyazo.com/bd55ec8e0518e1c2b21d514cb9ca6d76.jpg">
 <meta name="theme-color" content="#7952b3">
 
 
@@ -49,30 +50,45 @@
     
 <div class="col-lg-8 mx-auto p-3 py-md-5">
   <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
-    <span class="fs-4">{{ course.title }}</span>
+    <!-- プロジェクト名を表示 -->
+      <span class="fs-4">{{plan.title}}</span>
   </header>
 
   <main>
-    <p class="fs-5 col-md-8">{{ course.description }}</p>
+    <!-- 開発内容の表示 -->
+    <h4>開発内容：<br>{{plan.content}}</br></h4>
+    <h4>技術スタック：{{plan.language_category}}</h4>
+    <h4>こちらのリポジトリを使用します：{{plan.repository_url}}</h4>
+    <p class="fs-5 col-md-8 dev-flow">
+      チーム開発までの流れ
+      <p>1. プロジェクト作成者にチャットかコメントから、参加のメッセージを送ってください</p>
+      <p>2. 開発内容・開発の期間・リポジトリの共有を確認します</p>
+      <p>3. 開発中のチャットは、本サービスの<a href="" target="_blank" class="chat-link">グループチャット</a>か<a href="https://discord.com/" target="_blank" class="chat-link">discord</a>をご利用ください</p>
+    </p>
+
     <div class="mb-5">
-      <a href="{{ course.content }}" class="btn btn-primary btn-lg px-4">学習する</a>
+      <a href="http://localhost:8000/chat/room/" class="btn btn-primary">開発に参加する</a>
     </div>
-    <hr class="col-3 col-md-2 mb-5">
+
+    <hr class="col-3 col-md-2 mb-5 ">
+
+    <div class="comment-form">
+      <p>コメントからでも参加することができます</p>
+      <form action="" method="POST">
+        <p>
+          <input type="text" size="35" placeholder="コメントを入力" class="comment-form">
+        </p>
+        <p>
+          <input type="submit" value="コメントする" class="btn btn-primary comment-form">
+        </p>
+      </form>
+    </div>
+
     <div class="row g-5">
-      <div class="col-md-6">
-        <ul class="icon-list">
-          <a href="http://localhost:8000/course/" rel="noopener" class="back-course">« コース一覧へ</a>
-        </ul>
-      </div>
+      <a href="{% url 'projectlist' %}" rel="noopener" class="back-project">«プロジェクト一覧に戻る</a>
     </div>
   </main>
-
-  <footer class="pt-5 my-5 text-muted border-top">
-    Created by the developeer team &middot; &copy; 2022
-  </footer>
 </div>
-
-
     <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
       
@@ -80,11 +96,24 @@
 </html>
 
 <style>
-.back-course {
+.dev-flow {
+  margin-top: 30px;
+}
+
+.back-project {
     text-decoration: none;
 }
 
-.back-course:hover {
+.chat-link {
+  text-decoration: none;
+}
+
+.chat-link:hover {
+  text-decoration: underline;
+}
+
+.back-project:hover {
     text-decoration: underline;
 }
+
 </style>

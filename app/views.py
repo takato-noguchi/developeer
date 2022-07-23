@@ -1,14 +1,13 @@
-from dataclasses import field
-from re import template
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Profile, Project, Course, User
+from .models import Profile, Project, Course, User, Comment, Plan
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm, LoginForm, ProfileEditForm, ProjectCreateForm
+from django.contrib.auth.decorators import login_required
 
 class UserCreateView(CreateView):
     form_class = SignUpForm
@@ -41,24 +40,42 @@ class CourseDetailView(DetailView):
     template_name = 'courseDetail.html'
     model = Course
 
+# プロジェクトページ
 class ProjectListView(ListView):
     template_name = 'projectList.html'
-    model = Project
+    model = Plan
 
 class ProjectDetailView(DetailView):
     template_name = 'projectDetail.html'
-    model = Project
+    model = Plan
 
-class ProjectStartView(CreateView):
-    template_name = 'project.html'
-    fields = ('title', 'subtitle', 'img', 'liked')
-    model = Project
-    success_url = reverse_lazy('/')
-
-class ProfileCreateView(CreateView):
+# プロフィール編集
+class ProfileUpdateView(UpdateView):
+    form_class = ProfileEditForm
     template_name = 'profile.html'
-    fields = ('nickName', 'selfIntro', 'github_url', 'img')
-    model = Profile
+    model = User
+    success_url = reverse_lazy('top')
+
+# プロジェクト作成
+class ProjectStartView(LoginRequiredMixin, CreateView):
+    form_class = ProjectCreateForm
+    template_name = 'project.html'
+    model = Plan
+    success_url = reverse_lazy('top')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+# プロフィール削除
+class AccountDeleteView(DeleteView):
+    template_name = 'account.html'
+    model = User
+    success_url = reverse_lazy('top')
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 class AccountView(ListView):
     template_name = 'account.html'
@@ -71,4 +88,8 @@ class AccountDeleteView(DeleteView):
 class AccountPasswordView(UpdateView):
     template_name = 'account.html'
     model = User
+
+class CommentView(CreateView):
+    template_name = 'projectDetail.html'
+    model = Comment
 

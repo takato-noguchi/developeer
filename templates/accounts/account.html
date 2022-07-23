@@ -6,7 +6,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>Features · Bootstrap v5.0</title>
+    <title>Developeer - チーム開発のマッチングサービス</title>
+    <!-- icon image -->
+    <link rel="shortcut icon" href="https://i.gyazo.com/bd55ec8e0518e1c2b21d514cb9ca6d76.jpg">
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/features/">
 
@@ -48,14 +50,11 @@
   <body>
  
 <div class="container px-4 py-5" id="hanging-icons">
-    <h2 class="pb-2 border-bottom">{{user.username}}さん</h2>
+    <h2 class="pb-2 border-bottom">{{user.username}}</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
       <div class="col d-flex align-items-start">
-        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
-        </div>
         <div>
-          <h2>パスワードの変更</h2>
+          <h3>パスワードの変更</h3>
           <p>パスワードの変更をすることができます。以下のボタンを押して新しいパスワードを入力してください。</p>
           <a href="#" class="btn btn-primary">
             変更する
@@ -63,14 +62,20 @@
         </div>
       </div>
       <div class="col d-flex align-items-start">
-        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
-        </div>
         <div>
-          <h2>アカウントの削除</h2>
-          <p>以下、ボタンからアカウントの削除をすることができます。</p>
+          <h3>アカウントの削除</h3>
+          <p>以下のボタンからアカウントの削除をすることができます。</p>
           <a href="#" class="btn btn-danger">
               削除する
+          </a>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div>
+          <h3>お問い合わせ</h3>
+          <p>サービスに関して、ご不明点などがございましたら、以下のフォームからご記入ください。</p>
+          <a href="https://forms.gle/M4STM1SuK35xeL5L8" class="btn btn-primary">
+              記入する
           </a>
         </div>
       </div>

@@ -7,5 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.urls')),
     path('chat/', include('chat.urls')),
-]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('project_admin/', include('admin.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

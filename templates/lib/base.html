@@ -53,33 +53,34 @@
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="project/">プロジェクトをさがす
+            <a class="nav-link active" href="{% url 'projectlist' %}">プロジェクトをさがす
               <span class="visually-hidden">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="readyfor/">プロジェクトをはじめる
+            <a class="nav-link active" href="{% url 'readyfor' %}">プロジェクトをはじめる
               <span class="visually-hidden">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="course/">コース一覧
-              <span class="visually-hidden">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="https://www.notion.so/developeer-f35963e4bf764e5b93084d832af5a595">developeerとは
+            <a class="nav-link active" href="{% url 'courselist' %}">コース一覧
               <span class="visually-hidden">(current)</span>
             </a>
           </li>
         </ul>
+        <!-- 検索フォーム -->
+        <form>
+          <input type="search" name="q" placeholder="キーワードを入力" class="search-form">
+        </form>
         <form class="d-flex">
           {% if user.is_authenticated %}
           <div class="action">
             <div onclick="menuToggle();">
               {% if user.img %}
+              <a href="" class="btn btn-primary my-2 my-sm-0" >{{ user.username }}さんのプロジェクト</a>
               <img src="{{ user.img.url }}" class="user-icon">
               {% else %}
+              <a href="" class="btn btn-primary my-2 my-sm-0" >作成したプロジェクト</a>
               <img src="../media/avatars/default_icon.png" class="user-icon">
               {% endif %}
             </div>
@@ -87,7 +88,7 @@
               <h3>{{ user.username}}</h3>
               <ul>
                 <li>
-                  <a href="profile/">プロフィール編集</a>
+                  <a href="{% url 'profile' user.pk %}">プロフィール編集</a>
                 </li>
                 <li>
                   <!-- パスワードの変更とアカウント削除 -->
@@ -96,15 +97,14 @@
                 <li>
                   <a href="logout/">ログアウト</a>
                 <li>
-                  <!-- Google Formを入れる -->
-                  <a href="">お問い合わせ</a>
+                  <a href="https://forms.gle/M4STM1SuK35xeL5L8">お問い合わせ</a>
                 </li>
               </ul>
             </div>
           </div>
           {% else %}
-          <a href="login/" class="btn btn-primary my-2 my-sm-0" >ログイン</a>
-          <a href="signup/" class="btn btn-primary my-2 my-sm-0" >新規登録</a>
+          <a href="{% url 'login' %}" class="btn btn-primary my-2 my-sm-0" >ログイン</a>
+          <a href="{% url 'signup' %}" class="btn btn-primary my-2 my-sm-0" >新規登録</a>
           </form>
           <img src="../media/avatars/default_icon.png" class="user-icon">
           {% endif %}
@@ -125,8 +125,8 @@
             <li><a class="text-muted" href="#">プロジェクトとは</a></li>
             <li><a class="text-muted" href="#">コース概要</a></li>
             <li><a class="text-muted" href="#">利用方法</a></li>
-            <li><a class="text-muted" href="#">お問い合わせ</a></li>
-            <li><a class="text-muted" href="#">サービスのご感想</a></li>
+            <li><a class="text-muted" href="https://forms.gle/M4STM1SuK35xeL5L8">お問い合わせ</a></li>
+            <li><a class="text-muted" href="https://forms.gle/oGHCyfiztn13Fu7Z7">サービスのご感想</a></li>
         </ul>
         </div>
         <div class="col-6 col-md">

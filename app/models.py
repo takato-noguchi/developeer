@@ -1,3 +1,4 @@
+from cProfile import label
 from email.policy import default
 from unittest import defaultTestLoader
 from django.db import models
@@ -17,7 +18,7 @@ def upload_course_path(instance, filename):
 
 def upload_project_path(instance, filename):
     ext = filename.split('.')[-1]
-    return '/'.join(['projects', str(instance.userProject.id)+str(instance.title)+str(".")+(ext)])
+    return '/'.join(['plans', str(instance.userPlan.id)+str(instance.title)+str(".")+(ext)])
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -43,10 +44,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         db_table = 'user'
     
-    username = models.CharField(max_length=50, unique=False, default='')
+    username = models.CharField(max_length=50, unique=False, default='',)
     email = models.EmailField(max_length=50, unique=True)
     img = models.ImageField(blank=True, null=True, default="", upload_to=upload_img_path)
-    img_thumbnail = ImageSpecField(source='img', processors=[ResizeToFill(225, 225)],)
+    img_thumbnail = ImageSpecField(
+        source='img', 
+        processors=[ResizeToFill(225, 225)],
+        format="png",
+        options={"quality": 80}
+    )
+    selfIntro = models.CharField(max_length=100, default="", blank=True)
+    github_url = models.URLField(default="", blank=True)
     last_login = models.DateField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -97,6 +105,49 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+class Plan(models.Model):
+
+    class Meta:
+        db_table = 'plan'
+    
+    title = models.CharField(max_length=50)
+    content = models.TextField(max_length=500)
+    language_category = models.CharField(max_length=100, default="")
+    userPlan = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name= 'plan',
+        on_delete= models.CASCADE
+    )
+    img = models.ImageField(
+        blank=True, null=True, upload_to=upload_project_path,
+    )
+    img_thumbnail = ImageSpecField(
+        source='img', 
+        processors=[ResizeToFill(670, 370)],
+        format="png",
+        options={"quality": 80}
+    )
+    repository_url = models.URLField(default="", null=True, blank=True)
+    created_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+
+    class Meta:
+        db_table = 'comment'
+
+    text = models.CharField(max_length=100)
+    userComment = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name= 'userComment',
+        on_delete= models.CASCADE
+    )
+    post = models.ForeignKey(Plan, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.text
+
+# 使用しないモデル
 class Project(models.Model):
 
     class Meta:
@@ -113,24 +164,9 @@ class Project(models.Model):
     img = models.ImageField(
         blank=True, null=True, upload_to=upload_project_path,
     )
+    img_thumbnail = ImageSpecField(source='img', processors=[ResizeToFill(670, 370)],)
     liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name= 'liked', blank=True)
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.title
-
-class Comment(models.Model):
-
-    class Meta:
-        db_table = 'comment'
-
-    text = models.CharField(max_length=100)
-    userComment = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name= 'userComment',
-        on_delete= models.CASCADE
-    )
-    post = models.ForeignKey(Project, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.text
-
