@@ -14,7 +14,7 @@ from django.contrib import messages
 
 class UserCreateView(CreateView):
     form_class = SignUpForm
-    template_name = "signup.html" 
+    template_name = "accounts/signup.html" 
     success_url = reverse_lazy("/")
 
     def form_valid(self, form):
@@ -25,33 +25,33 @@ class UserCreateView(CreateView):
 
 class LoginView(LoginView):
     form_class = LoginForm
-    template_name = "login.html"
+    template_name = "accounts/login.html"
     model = User
 
 class Logout(LoginRequiredMixin, LogoutView):
-    template_name = 'login.html'
+    template_name = 'accounts/login.html'
 
 class ProjectView(ListView):
     template_name = 'top.html'
     model = Project
 
 class CourseView(ListView):
-    template_name = 'course.html'
+    template_name = 'courses/course.html'
     model = Course
 
 class CourseDetailView(DetailView):
-    template_name = 'courseDetail.html'
+    template_name = 'courses/courseDetail.html'
     model = Course
 
 # プロジェクト一覧ページ
 class ProjectListView(ListView):
-    template_name = 'projectList.html'
+    template_name = 'projects/projectList.html'
     model = Plan
     ordering = ['-created_at']
 
 # プロジェクト詳細ページ
 class ProjectDetailView(DetailView):
-    template_name = 'projectDetail.html'
+    template_name = 'projects/projectDetail.html'
     model = Plan
 
     def get_context_data(self, **kwargs):
@@ -62,14 +62,14 @@ class ProjectDetailView(DetailView):
 # プロフィール編集
 class ProfileUpdateView(UpdateView):
     form_class = ProfileEditForm
-    template_name = 'profile.html'
+    template_name = 'accounts/profile.html'
     model = User
     success_url = reverse_lazy('top')
 
 # プロジェクト作成
 class ProjectStartView(LoginRequiredMixin, CreateView):
     form_class = ProjectCreateForm
-    template_name = 'project.html'
+    template_name = 'projects/project.html'
     model = Plan
     success_url = reverse_lazy('top')
 
@@ -86,7 +86,7 @@ class ProjectStartView(LoginRequiredMixin, CreateView):
 
 # プロフィール削除
 class AccountDeleteView(DeleteView):
-    template_name = 'account.html'
+    template_name = 'accounts/account.html'
     model = User
     success_url = reverse_lazy('top')
     def form_valid(self, form):
@@ -94,25 +94,25 @@ class AccountDeleteView(DeleteView):
         return super().form_valid(form)
 
 class AccountView(ListView):
-    template_name = 'account.html'
+    template_name = 'accounts/account.html'
     model = User
 
 class AccountDeleteView(DeleteView):
-    template_name = 'account.html'
+    template_name = 'accounts/account.html'
     model = User
 
 class AccountPasswordView(UpdateView):
-    template_name = 'account.html'
+    template_name = 'accounts/account.html'
     model = User
 
 # プロジェクト管理
 class ProjectAdminView(ListView):
-    template_name = 'project-admin.html'
+    template_name = 'projects/project-admin.html'
     model = Plan
 
 # コメント投稿
 class comment_create(CreateView):
-    template_name = 'projectDetail.html'
+    template_name = 'projects/projectDetail.html'
     model = Comment
     success_url = reverse_lazy('top')
 
@@ -129,7 +129,7 @@ class comment_create(CreateView):
 
 # ユーザーのプロジェクト管理
 class ProjectAdminView(ListView):
-    template_name = "project-admin.html"
+    template_name = "projects/project-admin.html"
 
     # ▼▼▼ 追加 ▼▼▼
     def get_context_data(self, **kwargs):
