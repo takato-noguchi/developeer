@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
     'chat.apps.ChatConfig',
-    'projects',
     'imagekit',
     'channels',
     "bootstrap4",

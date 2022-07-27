@@ -7,6 +7,8 @@ from django.conf import settings
 from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 import uuid
+from django.utils import timezone
+from datetime import datetime
 
 def upload_img_path(instance, filename):
     ext = filename.split('.')[-1]

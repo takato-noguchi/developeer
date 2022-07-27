@@ -6,11 +6,7 @@
     <p class="mt-4 mb-5 border-bottom">
       <a href="">プロジェクトの作成方法</a>
     </p>
-    {% if book_id %}
     <form action="" method="post" enctype="multipart/form-data">
-    {% else %}
-    <form action="" method="post" enctype="multipart/form-data">
-    {% endif %}
       {% csrf_token %}
       {% bootstrap_form form layout='horizontal' %}
       <div class="form-group row">

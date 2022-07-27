@@ -1,6 +1,5 @@
-from dataclasses import field
 from django import forms
-from .models import Plan, User
+from .models import Plan, User, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -46,12 +45,33 @@ class ProjectCreateForm(forms.ModelForm):
 
     class Meta:
         model = Plan
-        exclude = ('userPlan',)
+        fields = ["title", "content", "language_category", "userPlan", "img", "repository_url",]
+
+        widgets = {
+            "userPlan": forms.HiddenInput()
+        }
 
         labels = {
-            'title': "プロジェクト名",
-            'content': "開発内容",
-            'language_category': "技術スタック",
+            'title': "プロジェクト名*",
+            'content': "開発内容*",
+            'language_category': "技術スタック*",
             'img': "サムネイル画像",
             'repository_url': "リポジトリURL",
         }
+
+# プロジェクトコメントフォーム
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ['text', 'userComment', 'post',]
+
+        widgets = {
+            'userComment': forms.HiddenInput(),
+            "post": forms.HiddenInput(),
+        }
+
+        labels = {
+            'text': "",
+        }
+

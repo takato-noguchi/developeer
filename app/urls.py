@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (ProjectView, UserCreateView, CourseView, CourseDetailView, ProjectListView, ProjectDetailView, ProjectStartView, 
-                    ProfileUpdateView, LoginView, LogoutView, AccountView, AccountDeleteView, AccountPasswordView)
+                    ProfileUpdateView, LoginView, LogoutView, AccountView, AccountDeleteView, AccountPasswordView, ProjectAdminView)
 
 urlpatterns = [
     path('', ProjectView.as_view(), name='top'),
@@ -16,4 +16,5 @@ urlpatterns = [
     path('account/', AccountView.as_view(), name='account'),
     path('account/delete/<int:pk>', AccountDeleteView.as_view(), name='accountDelete'),
     path('account/password/<int:pk>', AccountPasswordView.as_view(), name='accountPassword'),
+    path('project-admin', ProjectAdminView.as_view(), name='projectadmin'),
 ]

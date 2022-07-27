@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load imagekit %}
+
+<main>
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">
+        プロジェクト一覧
+      </h1>
+      <p class="lead text-muted">各言語・フレームワークを使った、チーム開発のプロジェクトがあります。チーム開発のプロジェクトに参加してみましょう。自分で始めることも可能です。</p>
+      <a href="{% url 'readyfor' %}" class="btn btn-primary my-2">プロジェクトをはじめる</a>
+    </div>
+  </div>
+</section>
+
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 page-hide">
+    {% for item in object_list %}
+      <div class="col card-group">
+          <div class="card shadow-sm">
+            {% if item.img %}
+              <img src="{{ item.img_thumbnail.url }}" class="bd-placeholder-img card-img-top" role="img">
+            {% else %}
+              <img src="../media/plans/1test_bDQgVM3.png" class="bd-placeholder-img card-img-top" role="img">
+            {% endif %}
+            <div class="card-body">
+              <img src="{{ item.userPlan.img.url }}" class="user-icon">
+              <p class="card-text">{{ item.title }}</p>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{% url 'project' item.pk %}">
+                  <button type="button" class="btn btn-primary">
+                    詳しく見る
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</main>
+{% endblock main %}

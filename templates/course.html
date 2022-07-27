@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block main %}
+<main>
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">コース一覧</h1>
+      <p class="lead text-muted">開発経験をつみたい言語・フレームワーク・ツールの教材を学習することができます。教材を学習してチーム開発に参加することが力になります。</p>
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col">
+        {% for course in object_list %}
+        <div class="card shadow-sm">
+          <img src= "{{ course.img.url }}" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" >
+            <div class="card-body">
+            <p class="card-text">{{ course.title }}</p>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="{% url 'course' course.pk %}">
+                <button type="button" class="btn btn-primary">
+                  詳しく見る
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+{% endblock main %}
