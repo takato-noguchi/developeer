@@ -171,7 +171,7 @@ class CreateCommentView(CreateView):
 
         if form.is_valid():
             form.save()
-            messages.success(request, "コメントを投稿しました。")
+            messages.success(request, "コメントを投稿しました")
         else:
             messages.error(request, "コメントが投稿できませんでした")
 
@@ -190,9 +190,6 @@ class CreateCommentView(CreateView):
 
     def get_url_success(self):
         return reverse_lazy("project",kwargs={"pk":self.kwargs["pk"]} )
-
-
-
 
 # def comment_create(request):
 #     user = request.user
