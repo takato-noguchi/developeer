@@ -8,7 +8,6 @@ from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 import uuid
 from django.utils import timezone
-from datetime import datetime
 
 def upload_img_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -68,26 +67,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-class Profile(models.Model):
-    
-    class Meta:
-        db_table = 'profile'
-
-    id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
-    nickName = models.CharField(max_length=20)
-    userProfile = models.OneToOneField(
-        settings.AUTH_USER_MODEL, related_name= 'userProfile',
-        on_delete= models.CASCADE
-    )
-    selfIntro = models.CharField(max_length=100, default="")
-    github_url = models.URLField(default="")
-    created_at = models.DateField(auto_now_add=True)
-    img = models.ImageField(blank=True, null=True, upload_to=upload_img_path)
-    img_thumbnail = ImageSpecField(source='img', processors=[ResizeToFill(225, 225)],)
-
-    def __str__(self):
-        return self.nickName
-
 class Course(models.Model):
 
     class Meta:
@@ -139,12 +118,13 @@ class Comment(models.Model):
     class Meta:
         db_table = 'comment'
 
-    text = models.CharField(max_length=100)
+    text = models.TextField(max_length=100, default='')
     userComment = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name= 'userComment',
         on_delete= models.CASCADE
     )
     post = models.ForeignKey(Plan, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(default=timezone.now(),)
 
     def __str__(self):
         return self.text
@@ -172,3 +152,23 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+class Profile(models.Model):
+    
+    class Meta:
+        db_table = 'profile'
+
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
+    nickName = models.CharField(max_length=20)
+    userProfile = models.OneToOneField(
+        settings.AUTH_USER_MODEL, related_name= 'userProfile',
+        on_delete= models.CASCADE
+    )
+    selfIntro = models.CharField(max_length=100, default="")
+    github_url = models.URLField(default="")
+    created_at = models.DateField(auto_now_add=True)
+    img = models.ImageField(blank=True, null=True, upload_to=upload_img_path)
+    img_thumbnail = ImageSpecField(source='img', processors=[ResizeToFill(225, 225)],)
+
+    def __str__(self):
+        return self.nickName

@@ -40,14 +40,15 @@
 <div class="col-lg-8 mx-auto p-3 py-md-5">
   <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
     <!-- プロジェクト名を表示 -->
-    <span class="fs-4">{{plan.title}}</span>
+    <h4 class="fs-4">{{plan.title}}</h4>
   </header>
 
   <main>
     <!-- 開発内容の表示 -->
+    <p class="create-date">作成日 {{ plan.created_at }}</p>
     <h4>開発内容：<br>{{plan.content}}</br></h4>
     <h4>技術スタック：{{plan.language_category}}</h4>
-    <h4>こちらのリポジトリを使用します：{{plan.repository_url}}</h4>
+    <h4>使用するリポジトリ：{{plan.repository_url}}</h4>
     <p class="fs-5 col-md-8 dev-flow">
       チーム開発までの流れ
       <p>1. プロジェクト作成者にチャットかコメントから、参加のメッセージを送ってください</p>
@@ -59,26 +60,49 @@
       <a href="http://localhost:8000/chat/room/" class="btn btn-primary">開発に参加する</a>
     </div>
 
-    <hr class="col-3 col-md-2 mb-5 ">
-
-    <div class="row">
-      <div class="col">
-          <ul class="list-unstyled">
-            {{ comment.text }}
-          </ul>
-      </div>
+    <div class="mb-5">
+      <a href="http://localhost:8000/chat/room/" class="back-project">グループチャットを開始する</a>
     </div>
+
+    <hr class="col-3 col-md-2 mb-5 ">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <strong class="text-dark mb-0">コメント</strong>
+    </div>
+    {% for comment in plan.comment_set.all %}
+      <div class="row d-flex">
+        <div class="col-md-12 col-lg-10 col-xl-8">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="d-flex flex-start">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="{{ comment.userComment.img.url }}" alt="avatar" width="40"
+                  height="40" />
+                <div class="w-100">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="text-primary fw-bold mb-0">
+                      {{ comment.userComment.username }}
+                      <span class="text-dark ms-2">{{ comment.text }} </span>
+                    </h6>
+                    <p class="mb-0">{{ comment.create_at }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
 
     <div class="comment-form">
       <p>コメントからでも参加することができます</p>
-      <form action="" method="POST">{% csrf_token %}
+      <form action="{% url 'comment' %}" method="POST">{% csrf_token %}
           {{ CommentForm }}
-        <br><input type="submit" value="コメントする" class="btn btn-primary comment-form"></br>
+        <br><input type="submit" value="コメントする" class="btn btn-primary comment-form">
       </form>
     </div>
 
     <div class="row g-5">
-      <a href="{% url 'projectlist' %}" rel="noopener" class="back-project">«プロジェクト一覧に戻る</a>
+      <a href="{% url 'projectlist' %}" rel="noopener" class="back-project">←プロジェクト一覧に戻る</a>
     </div>
   </main>
 </div>
@@ -112,5 +136,12 @@
 
 .comment-form {
   margin-top: 10px;
+}
+
+.link-grey {
+  color: #aaa; 
+} 
+.link-grey:hover { 
+  color: #00913b; 
 }
 </style>

@@ -1,10 +1,10 @@
-from re import template
-from typing import List
+from distutils.errors import CompileError
+from pyexpat import model
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Profile, Project, Course, User, Comment, Plan
+from .models import Project, Course, User, Comment, Plan
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
@@ -110,23 +110,6 @@ class ProjectAdminView(ListView):
     template_name = 'projects/project-admin.html'
     model = Plan
 
-# コメント投稿
-class comment_create(CreateView):
-    template_name = 'projects/projectDetail.html'
-    model = Comment
-    success_url = reverse_lazy('top')
-
-    def post(self, request, *args, **kwargs):
-        user = request.user
-        data = request.POST.dict()
-        data['userPlan'] = user.id
-        form = ProjectCreateForm(data=data, files=request.FILES)
-
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-
 # ユーザーのプロジェクト管理
 class ProjectAdminView(ListView):
     template_name = "projects/project-admin.html"
@@ -171,3 +154,59 @@ class PlanDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, "削除しました")
         return super().delete(request, *args, **kwargs)
+
+
+# コメント投稿
+class CreateCommentView(CreateView):
+    form_class = CommentForm
+    template_name = 'projects/projectDetail.html'
+    model = Comment
+    success_url = reverse_lazy('projectlist')
+
+    def comment_create(request):
+        post_id = request.POST.get("post")
+        text = request.POST.get("text")
+        data = {"text": text, "recipe": post_id}
+        form = CommentForm(data=data)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "コメントを投稿しました。")
+        else:
+            messages.error(request, "コメントが投稿できませんでした")
+
+        return redirect("project")
+            
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        data = request.POST.dict()
+        data['userComment'] = user.id
+        form = CommentForm(data=data)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_url_success(self):
+        return reverse_lazy("project",kwargs={"pk":self.kwargs["pk"]} )
+
+
+
+
+# def comment_create(request):
+#     user = request.user
+#     post_id = request.POST.get("post")
+#     text = request.POST.get("text")
+#     user.id = request.POST.get("userComment")
+
+#     data = {"text": text, "post": post_id, "userComment": user.id}
+
+#     form = CommentForm(data=data)
+#     if form.is_valid():
+#         form.save()
+#         messages.success(request, "コメントを投稿しました。")
+#     else:
+#         messages.error(request, "コメントが投稿できませんでした")
+
+#     return redirect("project", pk=post_id)

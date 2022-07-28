@@ -67,8 +67,9 @@ class CommentForm(forms.ModelForm):
         fields = ['text', 'userComment', 'post',]
 
         widgets = {
+            'text':  forms.Textarea(attrs={'rows':3, 'cols':30}),
             'userComment': forms.HiddenInput(),
-            "post": forms.HiddenInput(),
+            'post': forms.HiddenInput(),
         }
 
         labels = {
