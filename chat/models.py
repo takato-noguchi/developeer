@@ -5,10 +5,6 @@ import uuid
 
 class Room(models.Model):
     room_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    userRoom = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name= 'room',
-        on_delete= models.CASCADE
-    )
     plan = models.ForeignKey(
         Plan, on_delete=models.CASCADE
     )
