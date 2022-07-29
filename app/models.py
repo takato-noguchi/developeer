@@ -153,6 +153,7 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+# 使用しないモデル
 class Profile(models.Model):
     
     class Meta:

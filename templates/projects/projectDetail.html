@@ -56,8 +56,15 @@
       <p>3. 開発中のチャットは、本サービスの<a href="" target="_blank" class="chat-link">グループチャット</a>か<a href="https://discord.com/" target="_blank" class="chat-link">discord</a>をご利用ください</p>
     </p>
 
+
+    <form action="http://localhost:8000/chat/room" method="POST">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="btn btn-primary">メッセージを送る</button>
+    </form>
+
     <div class="mb-5">
-      <a href="" class="btn btn-primary">開発に参加する</a>
+      <a href="" class="btn btn-primary">メッセージを送る</a>
     </div>
 
     <div class="mb-5">

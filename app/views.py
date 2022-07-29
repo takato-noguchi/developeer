@@ -114,7 +114,6 @@ class ProjectAdminView(ListView):
 class ProjectAdminView(ListView):
     template_name = "projects/project-admin.html"
 
-    # ▼▼▼ 追加 ▼▼▼
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -189,7 +188,7 @@ class CreateCommentView(CreateView):
             return self.form_invalid(form)
 
     def get_url_success(self):
-        return reverse_lazy("project",kwargs={"pk":self.kwargs["pk"]} )
+        return reverse_lazy("project",kwargs={"pk":self.kwargs["pk"]})
 
 # def comment_create(request):
 #     user = request.user
