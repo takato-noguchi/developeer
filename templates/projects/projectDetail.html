@@ -57,15 +57,10 @@
     </p>
 
 
-    <form action="http://localhost:8000/chat/room" method="POST">
-      {% csrf_token %}
-      {{ form }}
+    <form action="http://localhost:8000/chat/room/chatRoom.id" method="POST" class="mb-5">{% csrf_token %}
+      {{ CreateRoomForm }}
       <button type="submit" class="btn btn-primary">メッセージを送る</button>
     </form>
-
-    <div class="mb-5">
-      <a href="" class="btn btn-primary">メッセージを送る</a>
-    </div>
 
     <div class="mb-5">
       <a href="http://localhost:8000/chat/room/" class="back-project">グループチャットを開始する</a>

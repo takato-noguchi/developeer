@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from .forms import CreateRoomForm, MessageForm
 
 # ルームを作成
-class ChatRoomView(CreateView):
+class CreateRoomView(CreateView):
     model = ChatRoom
     # ルーム作成はプロジェクトに紐づける
     template_name = 'projects/projectDetail.html'

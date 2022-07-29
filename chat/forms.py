@@ -1,6 +1,6 @@
 from dataclasses import field
 from django import forms
-from .models import ChatRoom, Chat
+from .models import ChatRoom, Message
 
 # ルーム作成フォーム
 class CreateRoomForm(forms.ModelForm):
@@ -18,7 +18,7 @@ class CreateRoomForm(forms.ModelForm):
 class MessageForm(forms.ModelForm):
 
     class Meta:
-        model = Chat
+        model = Message
         fields = ['message', 'room', 'userMessage',]
 
         widgets = {
