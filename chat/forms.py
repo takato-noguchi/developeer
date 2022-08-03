@@ -9,10 +9,10 @@ class CreateRoomForm(forms.ModelForm):
         model = ChatRoom
         fields = ['userRoom', 'plan']
 
-        widgets = {
-            'userRoom': forms.HiddenInput(),
-            'plan': forms.HiddenInput(),
-        }
+        # widgets = {
+        #     'userRoom': forms.HiddenInput(),
+        #     'plan': forms.HiddenInput(),
+        # }
 
 # メッセージ作成フォーム
 class MessageForm(forms.ModelForm):

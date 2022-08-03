@@ -102,7 +102,7 @@ class Plan(models.Model):
         blank=True, null=True, upload_to=upload_project_path,
     )
     img_thumbnail = ImageSpecField(
-        source='img', 
+        source='img',
         processors=[ResizeToFill(670, 370)],
         format="png",
         options={"quality": 80}

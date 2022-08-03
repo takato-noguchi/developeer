@@ -1,58 +1,49 @@
+<!-- メッセージルーム -->
 <html>
 <head>
+<title>Developeer - チーム開発のマッチングサービス</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
-
+<link rel="shortcut icon" href="https://i.gyazo.com/bd55ec8e0518e1c2b21d514cb9ca6d76.jpg">
 </head>
 <body>
 <div class="container">
-<h3 class="text-center">プロジェクト投稿者：{{ user.username }}</h3>
+<h4 class="text-center">チャットルーム</h4>
 <div class="messaging">
-    <div class="inbox_msg">
-    <div class="inbox_people">
-        <div class="headind_srch">
-        <div class="recent_heading">
-            <h4>developeer</h4>
-        </div>
-        </div>
-        <div class="inbox_chat">
-        <ol>
-            <li>メッセージをして、プロジェクト内容の確認をおこないます。</li>
-            <li>GitHubのリポジトリを作成します。</li>
-            <li>チーム開発のフローについて知りたい方は以下のガイドを参照にしてください。
-              <a href="">GitHub開発フロー</a>
-            </li>
-            <li>開発メンバーが2人、グループチャットを利用しましょう</li>
-        </ol>
-        </div>
-    </div>
-    <div class="mesgs">
-        <div class="msg_history">
+  <div class="inbox_msg">
+  <div class="mesgs">
+      <div class="msg_history">
+      <!-- プロジェクト投稿者側のメッセージを表示 -->
+      <!-- プロジェクトと投稿者と開発参加者で条件分岐をして、メッセージの表示を振り分ける -->
+      {% for item in object_list %}
         <div class="incoming_msg">
-            <div class="incoming_msg_img"> <img src="" alt="sunil"> </div>
+            <div class="incoming_msg_img"> <img src="{{ item.userMessage.img.url }}" alt="user" class="user-icon"> 
+            </div>
             <div class="received_msg">
             <div class="received_withd_msg">
-                <p>Test which is a new approach to have all
-                solutions</p>
-                <span class="time_date"> 11:01 AM    |    June 9</span></div>
+                <p>{{ item.message }}</p>
+                <span class="time_date"> 11:01 AM | June 9</span></div>
             </div>
         </div>
+        <!-- 開発参加者側のメッセージを表示 -->
         <div class="outgoing_msg">
             <div class="sent_msg">
-            <p>Test which is a new approach to have all
-                solutions</p>
-            <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+            <p>message</p>
+            <span class="time_date"> 11:01 AM | June 9</span> 
+            </div>
         </div>
-        </div>
-        <div class="type_msg">
-        <div class="input_msg_write">
+      {% endfor %}
+      </div>
+      <div class="type_msg">
+      <div class="input_msg_write">
+            <!-- Formを作成 {{ form }} -->
             <input type="text" class="write_msg" placeholder="メッセージを入力" />
             <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-        </div>
-        </div>
+      </div>
+      </div>
     </div>
     </div>      
 </div>
@@ -243,5 +234,12 @@ img{
 .msg_history {
   height: 516px;
   overflow-y: auto;
+}
+
+.user-icon {
+
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #f5f5f5;
 }
 </style>
