@@ -7,7 +7,7 @@ class CreateRoomForm(forms.ModelForm):
 
     class Meta:
         model = ChatRoom
-        fields = ['userRoom', 'plan']
+        fields = ['userRoom', 'plan', 'name']
 
         # widgets = {
         #     'userRoom': forms.HiddenInput(),
@@ -21,7 +21,7 @@ class MessageForm(forms.ModelForm):
         model = Message
         fields = ['message', 'room', 'userMessage',]
 
-        widgets = {
-            'room': forms.HiddenInput(),
-            'userMessage': forms.HiddenInput(),
-        } 
+        # widgets = {
+        #     'room': forms.HiddenInput(),
+        #     'userMessage': forms.HiddenInput(),
+        # } 

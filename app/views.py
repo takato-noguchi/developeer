@@ -93,14 +93,17 @@ class AccountDeleteView(DeleteView):
         form.save()
         return super().form_valid(form)
 
+# アカウント表示
 class AccountView(ListView):
     template_name = 'accounts/account.html'
     model = User
 
+# アカウント削除
 class AccountDeleteView(DeleteView):
     template_name = 'accounts/account.html'
     model = User
 
+# パスワード変更
 class AccountPasswordView(UpdateView):
     template_name = 'accounts/account.html'
     model = User
@@ -165,7 +168,7 @@ class CreateCommentView(CreateView):
     def comment_create(request):
         post_id = request.POST.get("post")
         text = request.POST.get("text")
-        data = {"text": text, "recipe": post_id}
+        data = {"text": text, "post": post_id}
         form = CommentForm(data=data)
 
         if form.is_valid():
@@ -189,6 +192,8 @@ class CreateCommentView(CreateView):
 
     def get_url_success(self):
         return reverse_lazy("project",kwargs={"pk":self.kwargs["pk"]})
+
+
 
 # def comment_create(request):
 #     user = request.user

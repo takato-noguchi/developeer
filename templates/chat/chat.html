@@ -1,57 +1,72 @@
-{% load static %}
+<h1 class="mt-3">{{ chatroom.name }}</h1>
 
-<link rel="stylesheet" type="text/css" href="{% static 'chat/style.css' %}">
-
-<div class="container">
-
-<div class="header">
-<a href="/" class="back">＜戻る</a>
-Django - チャットアプリデモ - {{ room.name }}
-</div>
-
-<div class="chat-room-body">
-{% for message in messages %}
-    <div class="chat-box">
-        <div class="chat-header">
-            名前：{{message.name}}
-        </div>
-        <div class="chat-body">
-            {{message.content}}
+<div class="row g-3" id="chat-list">
+    {% for message in chatroom.messages.all %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ message.userMessage.username }}</h5>
+            <p class="card-text">{{ message.message }}</p>
         </div>
     </div>
-{% endfor %}
-    <div id="footer"></div>
+    {% endfor %}
 </div>
 
-<div class="chat-room-footer">
-    <div class="send-msg">
-        <input placeholder="名前を入力" id="name" value=""/>
-        <input placeholder="メッセージを入力" id="msg" value=""/><button id="send">送信</button>
+<div class="row g-2 mt-3 align-items-center">
+    <div class="col-md">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="msg" placeholder="メッセージを入力">
+            <label for="msg">メッセージを送信する</label>
+        </div>
+    </div>
+    <div class="col-md">
+        <button id="send" class="btn btn-dark">送信する</button>
     </div>
 </div>
 
-</div>
 
+<template id="chat-template">
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
+        </div>
+    </div>
+</template>
+
+
+{% block script %}
 <script>
-const url = 'ws://localhost:8000/ws/' + '{{room.name}}'
-var ws = new WebSocket(url)
+    const url = 'ws://' + window.location.host + '/ws/{{room.id}}';
+    const ws = new WebSocket(url);
 
-document.getElementById("send").onclick = function sendMessage () {
-    var sendData = {
-        name: document.getElementById('name').value,
-        message: document.getElementById('msg').value
+    document.getElementById('msg').onkeydown = (e) => {
+        if (((e.ctrlKey && !e.metaKey) || (!e.ctrlKey && e.metaKey)) && e.keyCode == 13) {
+            document.getElementById('send').click();
+            return false
+        };
     }
-    ws.send(JSON.stringify(sendData))
-}
 
-ws.onmessage = e => {
-    var receiveData = JSON.parse(e.data)
-    var messageBox = document.createElement('div')
-    messageBox.className = 'chat-box'
-    var header = '<div class="chat-header">名前：' + receiveData.name + '</div>'
-    var body = '<div class="chat-body">' + receiveData.message + '</div>'
-    document.getElementById('footer').insertAdjacentHTML('beforebegin', header + body)
-    document.getElementById('footer').appendChild(messageBox)
-}
+    document.getElementById("send").onclick = function sendMessage() {
+        const sendData = {
+            message: document.getElementById('msg').value,
+        }
+        ws.send(JSON.stringify(sendData));
+        document.getElementById('msg').value = '';
+    }
 
+    ws.onerror = e => {
+        console.log(e);
+    }
+
+    ws.onmessage = e => {
+        const receiveData = JSON.parse(e.data);
+
+        const template = document.getElementById('chat-template');
+        const clone = template.content.cloneNode(true);
+
+        clone.querySelector('.card-title').textContent = receiveData.user;
+        clone.querySelector('.card-text').textContent = receiveData.message;
+        document.getElementById('chat-list').appendChild(clone);
+    }
 </script>
+{% endblock %}
