@@ -10,13 +10,13 @@ from urllib.parse import urlparse
 import datetime
 import time
 
-class ChatConsumer(AsyncWebsocketConsumer):
+class ChatConsumer(AsyncWebsocketConsumer): # チャットの非同期処理
     groups = ['broadcast']
 
-    async def connect(self):
+    async def connect(self): # WebSocket Connect
         try:
             await self.accept()
-            self.room_group_name = self.scope['url_route']['kwargs']['room_name']
+            self.room_group_name = self.scope['url_route']['kwargs']['room_name'] 
             await self.channel_layer.group_add(
                 self.room_group_name,
                 self.channel_name
@@ -24,14 +24,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         except Exception as e:
             raise
 
-    async def disconnect(self, close_code):
+    async def disconnect(self, close_code): # WebSocket Disconnect
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
         )
         await self.close()
 
-    async def receive(self, text_data):
+    async def receive(self, text_data): # Message 受け入れ
         try:
             print(str(text_data))
             text_data_json = json.loads(text_data)
@@ -49,7 +49,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         except Exception as e:
             raise
 
-    async def chat_message(self, event):
+    async def chat_message(self, event): # メッセージの送信
         try:
             message = event['message']
             name = event['name']
@@ -61,7 +61,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         except Exception as e:
             raise
 
-    @database_sync_to_async
+    @database_sync_to_async # データベースからの取り出し・保存
     def createMessage(self, event):
         try:
             room = Room.objects.get(
