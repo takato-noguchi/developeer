@@ -14,7 +14,7 @@ from django.contrib import messages
 
 class UserCreateView(CreateView):
     form_class = SignUpForm
-    template_name = "accounts/signup.html" 
+    template_name = "accounts/signup.html"
     success_url = reverse_lazy("/")
 
     def form_valid(self, form):
