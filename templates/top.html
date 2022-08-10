@@ -10,8 +10,8 @@
         <p>
           <a href="https://www.notion.so/developeer-f35963e4bf764e5b93084d832af5a595" class="btn btn-primary my-2">developeerとは</a>
           {% if user.is_authenticated %}
-          <a href="{% url 'projectlist' %}" class="btn btn-secondary my-2">プロジェクトをさがす</a>
-          {% else%}
+          <a href="{% url 'projectlist' %}" class="btn btn-secondary my-2">開発プロジェクトをさがす</a>
+          {% else %}
           <a href="{% url 'signup' %}" class="btn btn-secondary my-2">アカウントを作成</a>
           {% endif %}
         </p>
@@ -24,8 +24,8 @@
       <div class="py-5 text-center container">
         <div class="row py-lg-5 bg-light">
           <div class="col-lg-6 col-md-8 mx-auto">
-            <h2 class="fw-light project-sample">プロジェクトに参加しましょう</h2>
-            <p>さまざまな技術スタックのプロジェクトに無料で参加できます。もちろん自分で始めることも可能です。</p>
+            <h2 class="fw-light project-sample">チーム開発に参加しましょう</h2>
+            <p>さまざまな技術スタックのチーム開発に無料で参加できます。もちろん自分で始めることも可能です。</p>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@
           <h3 class="fw-light">developeerを使って、チーム開発を始めましょう</h3>
           {% if user.is_authenticated %}
           <p>
-            <a href="{% url 'readyfor' %}" class="btn btn-primary my-2">プロジェクトをはじめる</a>
+            <a href="{% url 'readyfor' %}" class="btn btn-primary my-2">チーム開発をはじめる</a>
           </p>
           {% else %}
           <p>

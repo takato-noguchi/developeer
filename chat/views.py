@@ -1,32 +1,31 @@
 from audioop import reverse
-from django.views.generic import CreateView, DetailView, ListView
-from .models import ChatRoom, Message
+from django.views.generic import CreateView, DetailView
+from .models import ChatRoom, Message, Plan
 from django.urls import reverse_lazy
 from .forms import CreateRoomForm, MessageForm
 from django.template import loader
+from django.contrib import messages
+from django.shortcuts import render, redirect
 
 # チャットルーム表示・作成機能
 class CreateRoomView(CreateView):
-    template_name = 'chat/index.html'
+    template_name = 'projects/projectDetail.html'
     model = ChatRoom
     form_class = CreateRoomForm
     success_url = reverse_lazy('projectlist')
 
-    # チャットルームを5つ取得 -> 作成順に並び替え
-    queryset = ChatRoom.objects.order_by('-created_at')[:5]
+    # どのプロジェクトに送るか
+    def room_create(request):
+        plan_id = request.POST.get("plan")
+        data = {"plan": plan_id}
+        form = CreateRoomForm(data=data)
 
-    def get_context_data(self):
-        context = super().get_context_data()
-        # 取得したquerysetをobjectsに代入
-        context['objects'] = self.get_queryset()
-        return context
+        if form.is_valid():
+            form.save()
+        else:
+            messages.error(request, "コメントが投稿できませんでした")
 
-    def get_success_url(self) -> str:
-        return reverse('chat:chat-room', kwargs={'pk': self.object.id})
-
-    def form_valid(self, form):
-        form.instance.posted_by = self.request.user
-        return super(CreateView, self).form_valid(form)
+        return redirect("projectlist")
 
 # 個別のチャットルーム表示機能
 class ChatRoomDetailView(DetailView):
@@ -48,6 +47,17 @@ class MessageCreateView(CreateView):
     template_name = 'chat/room.html'
     form_class = MessageForm
     success_url = reverse_lazy('projectlist')
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        data = request.POST.dict()
+        data['userMessage'] = user.id
+        form = MessageForm(data=data)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
     
 
 

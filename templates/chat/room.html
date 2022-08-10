@@ -1,4 +1,5 @@
 <!-- メッセージルーム -->
+{% load bootstrap4 %}
 <html>
 <head>
 <title>Developeer - チーム開発のマッチングサービス</title>
@@ -60,23 +61,19 @@
       </div>
     </div>
     </div>
-    <div class="type_msg">
-      <!-- <div class="input_msg_write"> -->
-        <form action="{% url 'chat:chat' %}" method="POST">{% csrf_token %}
-            {{  MessageForm }}
-          <br><input type="submit" value="送信する" class="btn btn-primary comment-form">
-        </form>
-      <!-- </div> -->
-    </div>     
+    <form action="{% url 'chat:chat' %}" method="POST" class="input-form">{% csrf_token %}
+        {% bootstrap_form MessageForm  %}
+        <input type="submit" value="送信する" class="btn btn-primary submit-btn">
+    </form>
+  </div>
 </div>
-  <a href="{% url 'projectlist'%}" >戻る</a>
 </div>
 </body>
 </html>
 
 <!-- JavaScript -->
 <script>
-    const url = 'ws://' + window.location.host + '/ws/{{room.id}}';
+    const url = 'ws://' + window.location.host + '/ws/{{chatroom.id}}';
     const ws = new WebSocket(url);
 
     document.getElementById('msg').onkeydown = (e) => {
@@ -186,33 +183,6 @@ img{
   float: right;
   width: 46%;
 }
-.input_msg_write input {
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-  border: medium none;
-  color: #4c4c4c;
-  font-size: 15px;
-  min-height: 48px;
-  width: 100%;
-}
-
-.type_msg {
-  border: 1px solid #747474;
-  position: relative;
-}
-
-.msg_send_btn {
-  background: #4169e1 none repeat scroll 0 0;
-  border: medium none;
-  border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  font-size: 17px;
-  position: absolute;
-  height: 33px;
-  right: 0;
-  top: 11px;
-  width: 33px;
-}
 
 .messaging { 
   padding: 0 0 50px 0;
@@ -233,5 +203,13 @@ img{
   font-size: 12px;
 }
 
+/* メッセージフォーム */
+.input-form {
+  width: 92%;
+}
 
+.submit-btn {
+  margin-left: 1050px;
+  margin-top: -53px;
+}
 </style>

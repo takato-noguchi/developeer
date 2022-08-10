@@ -6,15 +6,10 @@ import uuid
 from django.utils import timezone
 
 class ChatRoom(models.Model):
-    userRoom = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name= 'room',
-        on_delete= models.CASCADE
-    )
     plan = models.OneToOneField(
         Plan, on_delete=models.CASCADE,
         default=''
     )
-    name = models.CharField(max_length=50, default="")
     created_at = models.DateTimeField(default=timezone.now)
 
 class Message(models.Model):

@@ -57,21 +57,17 @@
       </p>
     </p>
 
-<!-- 
-    <form action="{url 'chat-room' }" method="POST" class="mb-5">{% csrf_token %}
-      {{ CreateRoomForm }}
-      <button type="submit" class="btn btn-primary">メッセージを送る</button>
-    </form> -->
-
-    <!-- if else文を使うのがよい
-    <form action="{% url 'chat:room'  %}" method="POST">{% csrf_token %}
-      {{ CreateRoomForm }}
-      <button type="submit" class="btn btn-primary">メッセージを送る</button>
-    </form> -->
-
-    <a href="{% url 'chat:room'  %}">
+    <!-- チャットルームへの遷移 -->
+    {% if plan.chatroom %}
+    <a href="{% url 'chat:chat-room' plan.chatroom.id %}">
       <button class="btn btn-primary">メッセージを送る</button>
     </a>
+    {% else %}
+    <form action="{% url 'chat:room' %}" method="POST">{% csrf_token %}
+      {{ CreateRoomForm }}
+      <input type="submit" class="btn btn-primary" value="メッセージを送る">
+    </form>
+    {% endif %}
 
     <hr class="col-3 col-md-2 mb-5 ">
     <!-- コメント欄 -->
@@ -128,14 +124,6 @@
     text-decoration: none;
 }
 
-.chat-link {
-  text-decoration: none;
-}
-
-.chat-link:hover {
-  text-decoration: underline;
-}
-
 .back-project {
   margin-top: 100px;
 }
@@ -146,12 +134,5 @@
 
 .comment-form {
   margin-top: 10px;
-}
-
-.link-grey {
-  color: #aaa; 
-} 
-.link-grey:hover { 
-  color: #00913b; 
 }
 </style>

@@ -7,7 +7,7 @@
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light">
-        プロジェクト一覧
+        開発プロジェクト一覧
       </h1>
       <p class="lead text-muted">各言語・フレームワークを使った、チーム開発のプロジェクトがあります。チーム開発のプロジェクトに参加してみましょう。自分で始めることも可能です。</p>
       <a href="{% url 'readyfor' %}" class="btn btn-primary my-2">プロジェクトをはじめる</a>
@@ -28,7 +28,11 @@
               <img src="../media/plans/developeer (660 × 225 px) (660 × 370 px).png" class="bd-placeholder-img card-img-top" role="img">
             {% endif %}
             <div class="card-body">
+              {% if item.userPlan.img %}
               <img src="{{ item.userPlan.img.url }}" class="user-icon">
+              {% else %}
+              <img src="../media/avatars/default_icon.png" class="user-icon">
+              {% endif %}
               <p class="card-text">{{ item.title }}</p>
               <div class="btn-group" role="group" aria-label="Basic example">
                 <a href="{% url 'project' item.pk %}">

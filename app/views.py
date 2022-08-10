@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from .forms import SignUpForm, LoginForm, ProfileEditForm, ProjectCreateForm, CommentForm
+from chat.forms import CreateRoomForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -54,9 +55,16 @@ class ProjectDetailView(DetailView):
     template_name = 'projects/projectDetail.html'
     model = Plan
 
+    # コメント投稿時のプロジェクトの指定
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['CommentForm'] = CommentForm(initial={'post': self.object})
+        return context
+
+    # ルーム作成時の実装を追加予定
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['CreateRoomForm'] = CreateRoomForm(initial={'plan': self.object})
         return context
 
 # プロフィール編集
@@ -165,7 +173,9 @@ class CreateCommentView(CreateView):
     model = Comment
     success_url = reverse_lazy('projectlist')
 
+    # プロジェクトの指定
     def comment_create(request):
+        # どの投稿かのフィールドを指定
         post_id = request.POST.get("post")
         text = request.POST.get("text")
         data = {"text": text, "post": post_id}
@@ -178,7 +188,8 @@ class CreateCommentView(CreateView):
             messages.error(request, "コメントが投稿できませんでした")
 
         return redirect("project")
-            
+
+    # ユーザーの指定       
     def post(self, request, *args, **kwargs):
         user = request.user
         data = request.POST.dict()
@@ -192,7 +203,6 @@ class CreateCommentView(CreateView):
 
     def get_url_success(self):
         return reverse_lazy("project",kwargs={"pk":self.kwargs["pk"]})
-
 
 
 # def comment_create(request):

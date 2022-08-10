@@ -7,12 +7,11 @@ class CreateRoomForm(forms.ModelForm):
 
     class Meta:
         model = ChatRoom
-        fields = ['userRoom', 'plan', 'name']
+        fields = ['plan',]
 
-        # widgets = {
-        #     'userRoom': forms.HiddenInput(),
-        #     'plan': forms.HiddenInput(),
-        # }
+        widgets = {
+            'plan': forms.HiddenInput(),
+        }
 
 # メッセージ作成フォーム
 class MessageForm(forms.ModelForm):
@@ -21,7 +20,11 @@ class MessageForm(forms.ModelForm):
         model = Message
         fields = ['message', 'room', 'userMessage',]
 
-        # widgets = {
-        #     'room': forms.HiddenInput(),
-        #     'userMessage': forms.HiddenInput(),
-        # } 
+        widgets = {
+            'room': forms.HiddenInput(),
+            'userMessage': forms.HiddenInput(),
+        }
+
+        labels = {
+            'message': "",
+        }
