@@ -4,8 +4,10 @@ from app.models import Plan
 from django.conf import settings
 import uuid
 from django.utils import timezone
+# uuidを追加
 
 class ChatRoom(models.Model):
+    # uuidを追加する
     plan = models.OneToOneField(
         Plan, on_delete=models.CASCADE,
         default=''
