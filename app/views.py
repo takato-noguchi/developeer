@@ -1,10 +1,10 @@
 from distutils.errors import CompileError
 from pyexpat import model
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView, TemplateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Project, Course, User, Comment, Plan
+from .models import Course, User, Comment, Plan
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
@@ -12,6 +12,9 @@ from .forms import SignUpForm, LoginForm, ProfileEditForm, ProjectCreateForm, Co
 from chat.forms import CreateRoomForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+class TopPageView(TemplateView):
+    template_name = "top.html"
 
 class UserCreateView(CreateView):
     form_class = SignUpForm
@@ -31,10 +34,6 @@ class LoginView(LoginView):
 
 class Logout(LoginRequiredMixin, LogoutView):
     template_name = 'accounts/login.html'
-
-class ProjectView(ListView):
-    template_name = 'top.html'
-    model = Project
 
 class CourseView(ListView):
     template_name = 'courses/course.html'

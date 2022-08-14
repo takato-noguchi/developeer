@@ -124,52 +124,7 @@ class Comment(models.Model):
         on_delete= models.CASCADE
     )
     post = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    create_at = models.DateTimeField(default=timezone.now(),)
+    create_at = models.DateTimeField()
 
     def __str__(self):
         return self.text
-
-# 使用しないモデル
-class Project(models.Model):
-
-    class Meta:
-        db_table = 'project'
-    
-    id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=20)
-    subtitle = models.CharField(max_length=50)
-    language_category = models.CharField(max_length=50, default="")
-    userProject = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name= 'project',
-        on_delete= models.CASCADE
-    )
-    img = models.ImageField(
-        blank=True, null=True, upload_to=upload_project_path,
-    )
-    img_thumbnail = ImageSpecField(source='img', processors=[ResizeToFill(670, 370)],)
-    liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name= 'liked', blank=True)
-    created_at = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title
-
-# 使用しないモデル
-class Profile(models.Model):
-    
-    class Meta:
-        db_table = 'profile'
-
-    id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
-    nickName = models.CharField(max_length=20)
-    userProfile = models.OneToOneField(
-        settings.AUTH_USER_MODEL, related_name= 'userProfile',
-        on_delete= models.CASCADE
-    )
-    selfIntro = models.CharField(max_length=100, default="")
-    github_url = models.URLField(default="")
-    created_at = models.DateField(auto_now_add=True)
-    img = models.ImageField(blank=True, null=True, upload_to=upload_img_path)
-    img_thumbnail = ImageSpecField(source='img', processors=[ResizeToFill(225, 225)],)
-
-    def __str__(self):
-        return self.nickName

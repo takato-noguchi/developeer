@@ -64,7 +64,7 @@ class ChatConsumer(AsyncWebsocketConsumer): # チャットの非同期処理
     @database_sync_to_async # データベースからの取り出し・保存
     def createMessage(self, event):
         try:
-            room = Room.objects.get(
+            room = ChatRoom.objects.get(
                 name=self.room_group_name
             )
             Message.objects.create(

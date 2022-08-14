@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import (ProjectView, UserCreateView, CourseView, CourseDetailView, ProjectListView, ProjectDetailView, ProjectStartView, 
+from .views import ( TopPageView, UserCreateView, CourseView, CourseDetailView, ProjectListView, ProjectDetailView, ProjectStartView, 
                     ProfileUpdateView, LoginView, LogoutView, AccountView, AccountDeleteView, AccountPasswordView, ProjectAdminView,  CreateCommentView)
 
 urlpatterns = [
-    path('', ProjectView.as_view(), name='top'),
+    path('', TopPageView.as_view(), name='top'),
     path('signup/', UserCreateView.as_view(), name='signup'),
     path('course/', CourseView.as_view(), name='courselist'),
     path('course/<int:pk>', CourseDetailView.as_view(), name="course"),
