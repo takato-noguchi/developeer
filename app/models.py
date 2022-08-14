@@ -78,13 +78,13 @@ class Course(models.Model):
     learning_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name= 'learning_user')
     postUser = models.OneToOneField(
         settings.AUTH_USER_MODEL, related_name= 'postUser',
-        on_delete= models.CASCADE, default= 0, 
+        on_delete= models.CASCADE, default='',
     )
     content = models.URLField()
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return self.titles
 
 class Plan(models.Model):
 
@@ -124,7 +124,7 @@ class Comment(models.Model):
         on_delete= models.CASCADE
     )
     post = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    create_at = models.DateTimeField()
+    created_at = models.DateTimeField()
 
     def __str__(self):
         return self.text

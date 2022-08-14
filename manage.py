@@ -2,6 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+# MySQLとの接続
 import pymysql
 pymysql.install_as_MySQLdb()
 

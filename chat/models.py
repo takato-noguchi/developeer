@@ -15,7 +15,6 @@ class ChatRoom(models.Model):
 
 class Message(models.Model):
     message = models.CharField(max_length=100)
-    name = models.CharField(max_length=50, default="")
     room = models.ForeignKey(
         ChatRoom, on_delete=models.CASCADE,
         related_name='messages'
