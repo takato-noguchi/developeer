@@ -1,3 +1,4 @@
+from dataclasses import field
 from django import forms
 from .models import Plan, User, Comment
 from django.contrib.auth.forms import UserCreationForm
@@ -42,6 +43,25 @@ class ProfileEditForm(forms.ModelForm):
 
 # プロジェクト作成フォーム
 class ProjectCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Plan
+        fields = ["title", "content", "language_category", "userPlan", "img", "repository_url",]
+
+        widgets = {
+            "userPlan": forms.HiddenInput()
+        }
+
+        labels = {
+            'title': "プロジェクト名*",
+            'content': "開発内容*",
+            'language_category': "技術スタック*",
+            'img': "サムネイル画像",
+            'repository_url': "リポジトリURL",
+        }
+
+# プロジェクト編集フォーム
+class ProjectUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Plan

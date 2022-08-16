@@ -45,21 +45,21 @@
   <main>
     <!-- 開発内容の表示 -->
     <p class="create-date">作成日 {{ plan.created_at }}</p>
-    <h4>開発内容：<br>{{plan.content}}</br></h4>
-    <h4>技術スタック：{{plan.language_category}}</h4>
+    <h4 class="dev-content">開発内容：<br>{{plan.content}}</br></h4>
+    <h4 class="dev-content">技術スタック：{{plan.language_category}}</h4>
     <h4>使用するリポジトリ：{{plan.repository_url}}</h4>
     <p class="fs-5 col-md-8 dev-flow">
       チーム開発までの流れ
       <p>1. プロジェクト作成者にチャットかコメントから、参加のメッセージを送ってください</p>
       <p>2. 開発内容・開発の期間・リポジトリの共有を確認します</p>
-      <p>3. チーム開発のフローについて知りたい方は以下のガイドを参照にしてください。
+      <p>3. チーム開発のフローについて知りたい方はガイドを参照してください。
         <a href="" class="back-project">Git/GitHub開発フローを見る</a>
       </p>
     </p>
 
     <!-- チャットルームへの遷移 -->
     {% if plan.chatroom %}
-    <a href="{% url 'chat:chat-room' plan.chatroom.id %}">
+    <a href="{% url 'chat:chat-room' plan.chatroom.room_id %}">
       <button class="btn btn-primary">メッセージを送る</button>
     </a>
     {% else %}
@@ -70,43 +70,7 @@
     {% endif %}
 
     <hr class="col-3 col-md-2 mb-5 ">
-    <!-- コメント欄 -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <strong class="text-dark mb-0">コメント</strong>
-    </div>
-    {% for comment in plan.comment_set.all %}
-      <div class="row d-flex">
-        <div class="col-md-12 col-lg-10 col-xl-8">
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="d-flex flex-start">
-                <img class="rounded-circle shadow-1-strong me-3"
-                  src="{{ comment.userComment.img.url }}" alt="avatar" width="40"
-                  height="40" />
-                <div class="w-100">
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="text-primary fw-bold mb-0">
-                      {{ comment.userComment.username }}
-                      <span class="text-dark ms-2">{{ comment.text }} </span>
-                    </h6>
-                    <p class="mb-0">{{ comment.create_at }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-
-    <div class="comment-form">
-      <p>コメントからでも参加することができます</p>
-      <form action="{% url 'comment' %}" method="POST">{% csrf_token %}
-          {{ CommentForm }}
-        <br><input type="submit" value="コメントする" class="btn btn-primary comment-form">
-      </form>
-    </div>
-
+    
     <div class="row g-5">
       <a href="{% url 'projectlist' %}" rel="noopener" class="back-project">←プロジェクト一覧に戻る</a>
     </div>
@@ -134,5 +98,9 @@
 
 .comment-form {
   margin-top: 10px;
+}
+
+.dev-content {
+  margin-bottom: 10px;
 }
 </style>

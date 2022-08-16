@@ -4,6 +4,12 @@ import os
 from pathlib import Path
 from telnetlib import LOGOUT
 import environ
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'dark',
+    messages.ERROR: 'danger',
+}
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent

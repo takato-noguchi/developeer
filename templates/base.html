@@ -1,3 +1,4 @@
+{% load bootstrap4 %}
 <!doctype html>
 <html lang="ja">
   <head>
@@ -64,7 +65,7 @@
         </ul>
         <!-- 検索フォーム -->
         <form>
-          <input type="search" name="q" placeholder="キーワードを入力" class="search-form">
+          <input name="q" value="{{ request.GET.q }}" type="search" eholder="Search" aria-label="Search" class="search-form" placeholder="キーワードを入力">
         </form>
         <form class="d-flex">
           {% if user.is_authenticated %}
@@ -106,6 +107,8 @@
     </div>
   </nav>
 </header>
+
+
 
 {% block main %}
 {% endblock main %}
@@ -149,6 +152,7 @@
 </footer>
 </body>
 </html>
+
 
 
 <script>
