@@ -21,4 +21,8 @@ urlpatterns = [
     path('comment/', CreateCommentView.as_view(), name="comment"),
     path('project-dashboard/<int:pk>/edit', ProjectUpdateView.as_view(), name='projectEdit'),
     path('project-dashboard/<int:pk>/delete', ProjectDeleteView.as_view(), name='projectDelete'),
+    # path('account/password_reset/', name='password_reset'),
+    # path('account/password_reset/done/', name='password_reset_done'),
+    # path('account/reset/<uidb64>/<token>/', name='password_reset_confirm'),
+    # path('account/reset/done/', name='password_reset_complete'),
 ]

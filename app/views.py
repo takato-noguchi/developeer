@@ -29,7 +29,7 @@ class UserCreateView(CreateView):
         return HttpResponseRedirect("top")
 
     def form_valid(self, form):
-        messages.success(self.request, "新規アカウントが作成されました。確認メールをご確認ください")
+        messages.success(self.request, "新規アカウントが作成されました")
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -146,8 +146,13 @@ class AccountView(ListView):
 
 # アカウント削除
 class AccountDeleteView(DeleteView):
-    template_name = 'accounts/account.html'
+    template_name = 'accounts/accountDelete.html'
     model = User
+    success_url = reverse_lazy('top')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "アカウントを削除しました")
+        return super().delete(request, *args, **kwargs)
 
 # パスワード変更
 class AccountPasswordView(UpdateView):
@@ -187,12 +192,12 @@ class ProjectUpdateView(UpdateView):
 
 # プロジェクトの削除
 class ProjectDeleteView(DeleteView):
+    template_name = 'projects/projectDelete.html'
     model = Plan
-    # プロジェクト管理のapp name
     success_url = reverse_lazy("projectadmin")
 
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, "削除しました")
+        messages.success(self.request, "プロジェクトを削除しました")
         return super().delete(request, *args, **kwargs)
 
 

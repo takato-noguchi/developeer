@@ -3,9 +3,6 @@
 
 {% block content %}
     <h3 class="mt-4 mb-5">開発プロジェクト編集</h3>
-    <p class="mt-4 mb-5 border-bottom">
-      <a href="">プロジェクトの作成方法</a>
-    </p>
     <form action="{% url 'projectadmin' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form layout='horizontal' %}
