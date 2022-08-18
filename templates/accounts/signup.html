@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/static/css/sign_form.css">
 <form class="form-wrapper" method="POST" action="">
 <h1>新規登録</h1>
 {% csrf_token%}
@@ -8,88 +9,6 @@
     <input class="btn-signup" type="submit" value="アカウントを作成する" />
 </div>
 <div class="form-footer">
-    <p><a href="http://localhost:8000/login/">ログインの方はこちらから</a></p>
+    <p><a href="{% url 'login' %}">ログインの方はこちらから</a></p>
 </div>
 </form>
-
-<style>
-form {
-    padding: 0 1.5em;
-}
-    
-.form-wrapper {
-    background: #fafafa;
-    margin: 3em auto;
-    padding: 0 1em;
-    max-width: 370px;
-}
-    
-h1 {
-    text-align: center;
-    padding: 1em 0;
-}
-
-form {
-    padding: 0 1.5em;
-}
-
-.form-item {
-    margin-bottom: 0.75em;
-    width: 100%;
-}
-
-.form-item input {
-    background: #fafafa;
-    border: none;
-    border-bottom: 2px solid #e9e9e9;
-    color: #666;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1em;
-    height: 50px;
-    transition: border-color 0.3s;
-    width: 100%;
-}
-
-.form-item input:focus {
-    border-bottom: 2px solid #c0c0c0;
-    outline: none;
-}
-
-.button-panel {
-    margin: 2em 0 0;
-    width: 100%;
-}
-
-.btn-signup {
-    padding: 5px 10px 5px 10px;
-    margin-left: 100px;
-    margin-bottom: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    background-color:#4169e1;
-    cursor: pointer;
-    border-radius: 6px;
-}
-
-.btn-signup:hover {
-    background-color: #1e90ff;
-}
-
-.form-footer {
-    font-size: 1em;
-    padding: 2em 0;
-    text-align: center;
-}
-
-.form-footer a {
-    color: #8c8c8c;
-    text-decoration: none;
-    transition: border-color 0.3s;
-}
-
-.form-footer a:hover {
-    border-bottom: 1px dotted #8c8c8c;
-}
-</style>
-    
