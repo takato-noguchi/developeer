@@ -2,6 +2,14 @@
 {% block main %}
 {% load imagekit %}
 
+{% if messages %}
+  <div class="messages_ul">
+    {% for message in messages %}
+      <p class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible" role="alert">{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+
 <main>
 <section class="py-5 text-center container">
   <div class="row py-lg-5">

@@ -23,4 +23,4 @@ class Message(models.Model):
         settings.AUTH_USER_MODEL, related_name= 'message',
         on_delete= models.CASCADE
     )
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(default=timezone.now)
