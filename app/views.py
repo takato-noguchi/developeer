@@ -185,11 +185,6 @@ class ProjectUpdateView(UpdateView):
     form_class = ProjectUpdateForm
     success_url = reverse_lazy('projectadmin')
 
-    # def get_success_url(self):
-    #     pk = self.kwargs.get("pk")
-    #     return reverse("projectEdit", kwargs={"pk": pk})
-
-
 # プロジェクトの削除
 class ProjectDeleteView(DeleteView):
     template_name = 'projects/projectDelete.html'
