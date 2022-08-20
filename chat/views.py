@@ -6,9 +6,11 @@ from .forms import CreateRoomForm, MessageForm
 from django.template import loader
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # チャットルーム表示・作成機能
-class CreateRoomView(CreateView):
+class CreateRoomView(LoginRequiredMixin, CreateView):
     template_name = 'projects/projectDetail.html'
     model = ChatRoom
     form_class = CreateRoomForm
@@ -28,7 +30,7 @@ class CreateRoomView(CreateView):
         return redirect("projectlist")
 
 # 個別のチャットルーム表示機能
-class ChatRoomDetailView(DetailView):
+class ChatRoomDetailView(LoginRequiredMixin, DetailView):
     template_name = 'chat/room.html'
     model = ChatRoom
 
@@ -41,7 +43,7 @@ class ChatRoomDetailView(DetailView):
         return context
 
 # メッセージを作成
-class MessageCreateView(CreateView):
+class MessageCreateView(LoginRequiredMixin, CreateView):
     model = Message
     # メッセージは、チャットルームで
     template_name = 'chat/room.html'

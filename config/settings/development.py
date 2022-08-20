@@ -3,9 +3,14 @@
 import os
 from pathlib import Path
 from telnetlib import LOGOUT
-import environ
 from django.contrib.messages import constants as messages
 
+# env
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+# Message Framework
 MESSAGE_TAGS = {
     messages.DEBUG: 'dark',
     messages.ERROR: 'danger',
@@ -18,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$%euzegkbn0)$*m4i58ceon!c%-9q8!l+idb7*dk0pueca&io&'
+SECRET_KEY = 'SECRETKEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
     'imagekit',
     'channels',
     "bootstrap4",
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -83,14 +89,13 @@ CHANNEL_LAYERS = {
 
 
 # Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'developeer_db',
-        'USER': 'root',
-        'PASSWORD': 'hthmm0528N-T',
+        'NAME': os.getenv('LOCAL_DB'),
+        'USER': os.getenv('USER'),
+        'PASSWORD': os.getenv('PASSWORD'),
         'HOST': 'localhost',
         'PORT': '3306'
     }
