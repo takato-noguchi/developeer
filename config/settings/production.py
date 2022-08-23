@@ -2,9 +2,9 @@
 import os
 from .development import *
 
-DEBUG = False
-
 ALLOWED_HOSTS = ["*", ]
+
+DEBUG = False
 
 # AWS settings
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
