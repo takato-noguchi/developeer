@@ -6,9 +6,9 @@ from telnetlib import LOGOUT
 from django.contrib.messages import constants as messages
 
 # env
-from dotenv import load_dotenv
-import os
-load_dotenv()
+import environ
+env = environ.Env()
+env.read_env('.env')
 
 # Message Framework
 MESSAGE_TAGS = {
@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = 'SECRETKEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -89,15 +89,14 @@ CHANNEL_LAYERS = {
 
 
 # Database
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('LOCAL_DB'),
-        'USER': os.getenv('USER'),
-        'PASSWORD': os.getenv('PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'ENGINE': env('DB_ENGINE'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST':env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 

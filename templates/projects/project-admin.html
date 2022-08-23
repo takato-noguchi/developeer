@@ -5,18 +5,18 @@
     <h3 class="mt-4 border-bottom">ダッシュボード一覧</h3>
     <a href="{% url 'readyfor' %}" class="btn btn-primary btn-sm my-3">プロジェクトを追加する</a>
     <table class="table table-striped table-bordered">
+      {% for plan in projects_list %}
       <thead>
         <tr>
-          {% for plan in projects_list %}
           <th scope="col">プロジェクト名</th>
           <th scope="row">{{ plan.title }}</th>
           <td>
             <a href="{% url 'projectEdit' plan.id %}" class="btn btn-outline-primary btn-sm">編集する</a>
             <a href="{% url 'projectDelete' plan.id %}" class="btn btn-outline-danger btn-sm">削除する</a>
           </td>
-          {% endfor %}
         </tr>
       </thead>
+      {% endfor %}
     </table>
     <a href="{% url 'top'%}" class="btn btn-secondary btn-sm">戻る</a>
 {% endblock content %}
