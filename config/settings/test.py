@@ -1,8 +1,6 @@
 # テスト環境
 from .development import *
 
-DEBUG = False
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

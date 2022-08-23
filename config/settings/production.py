@@ -1,13 +1,10 @@
 # 本番環境
+import os
 from .development import *
 
-import environ
-
-env = environ.Env()
+DEBUG = False
 
 ALLOWED_HOSTS = ["*", ]
-
-DEBUG = env('DEBUG')
 
 # AWS settings
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
