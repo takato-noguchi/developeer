@@ -3,7 +3,7 @@ import os
 from .development import *
 
 ALLOWED_HOSTS = ["*", ]
-DEBUG = os.environ.get('DJANGO_DEBUG') == 'True'
+DEBUG = env('DEBUG')
 
 # AWS settings
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
