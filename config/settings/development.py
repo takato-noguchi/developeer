@@ -1,5 +1,4 @@
 # ローカル環境
-
 import os
 from pathlib import Path
 from telnetlib import LOGOUT
@@ -23,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = '$%euzegkbn0)$*m4i58ceon!c%-9q8!l+idb7*dk0pueca&io&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
