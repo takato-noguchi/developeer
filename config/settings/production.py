@@ -1,9 +1,12 @@
 # 本番環境
 import os
+import dj_database_url
 from .development import *
 
 ALLOWED_HOSTS = ["*", ]
-DEBUG = env('DEBUG')
+
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = False
 
 # AWS settings
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
