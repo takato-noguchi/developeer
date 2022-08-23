@@ -7,7 +7,7 @@ env = environ.Env()
 
 ALLOWED_HOSTS = ["*", ]
 
-DEBUG = False
+DEBUG = env('DEBUG')
 
 # AWS settings
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
