@@ -6,7 +6,7 @@ from .development import *
 ALLOWED_HOSTS = ["*", ]
 
 SECRET_KEY = env('SECRET_KEY')
-DEBUG = False
+DEBUG=False
 
 # AWS settings
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')

@@ -28,7 +28,7 @@ SECRET_KEY = '$%euzegkbn0)$*m4i58ceon!c%-9q8!l+idb7*dk0pueca&io&'
 
 ALLOWED_HOSTS = []
 
-DEBUG = True
+DEBUG=True
 
 # Application definition
 
@@ -153,3 +153,6 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 EMAIL_BACKEND = 'djanog.core.mail.backends.console.EmailBackend'
+
+import django_heroku
+django_heroku.settings(locals())
