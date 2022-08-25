@@ -1,12 +1,9 @@
 # 本番環境
-import os
-import dj_database_url
 from .development import *
+# env
+DEBUG = os.get.environ('DEBUG')
 
 ALLOWED_HOSTS = ["*", ]
-
-SECRET_KEY = env('SECRET_KEY')
-DEBUG=False
 
 # AWS settings
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
@@ -20,7 +17,9 @@ S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 MEDIA_URL = S3_URL
 
 # DB settings
+
 DATABASES = {
     'default': env.db()
 }
+
 
