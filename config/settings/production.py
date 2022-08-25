@@ -1,7 +1,7 @@
 # 本番環境
 from .development import *
 # env
-DEBUG = os.get.environ('DEBUG')
+DEBUG = False
 
 ALLOWED_HOSTS = ["*", ]
 
