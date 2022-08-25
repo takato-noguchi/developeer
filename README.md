@@ -4,18 +4,10 @@ __URL：__
 
 ## ER図
 
-```plantuml
-@startuml
-entity "user" {
-    + id [PK]
-    ==
-    name:varchar(128)
-}
-@enduml
-```
 
-## インフラ構成
+## アプリケーション構成図
 
+![アプリケーション構成図](https://cacoo.com/diagrams/tkuhNk7Tf42zrTBi-3CC26.png "アプリケーション構成図")
 
 ## 環境構築
 
@@ -32,4 +24,9 @@ $ pip install -r requirements.txt
 3. Runserver your localhost
 ```bash
 $ python manage.py runserver
+```
+
+4. Access URL
+```
+http://localhost:8000
 ```
