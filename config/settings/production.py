@@ -5,7 +5,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["*", ]
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # AWS settings
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
