@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block main %}
 {% load imagekit %}
+{% load static %}
 
 {% if messages %}
   <div class="messages_ul">
@@ -38,7 +39,7 @@
               {% if item.userPlan.img %}
               <img src="{{ item.userPlan.img.url }}" class="user-icon">
               {% else %}
-              <img src="../media/avatars/default_icon.png" class="user-icon">
+              <img src="{% static 'images/default_icon.png/' %}" class="user-icon">
               {% endif %}
               <p class="card-text">{{ item.title }}</p>
               <div class="btn-group" role="group" aria-label="Basic example">

@@ -1,5 +1,6 @@
 <!-- メッセージルーム -->
 {% load bootstrap4 %}
+{% load static %}
 <html>
 <head>
 <title>Developeer - チーム開発のマッチングサービス</title>
@@ -9,7 +10,7 @@
 <!------ Include the above in your HEAD tag ---------->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 <link rel="shortcut icon" href="https://i.gyazo.com/bd55ec8e0518e1c2b21d514cb9ca6d76.jpg">
-<link rel="stylesheet" href="/static/css/room.css">
+<link rel="stylesheet" href="{% static 'css/room.css' %}">
 </head>
 <body>
 <div class="container">
@@ -20,12 +21,12 @@
       <div class="msg_history">
         <div class="incoming_msg">
           <div class="incoming_msg_img">
-            <img src="/static/images/developeer_official.jpeg" alt="公式" class="user-icon">
+            <img src="{% static 'images/developeer_official.jpeg' %}" alt="公式" class="user-icon">
           </div>
           <div class="received_msg">
             <div class="received_withd_msg">
                 <p>
-                  チャットルームの利用方法を知りたい方は、<a href="">こちら</a>から
+                  チャットルームの利用方法を知りたい方は、<a href="https://broadleaf-baroness-77d.notion.site/854e5612e39949e79c382a724ca3e3b7">こちら</a>から
                 </p>
             </div>
           </div>
@@ -41,7 +42,7 @@
             </div>
             {% else %}
             <div class="incoming_msg_img">
-              <img src="../media/avatars/default_icon.png" class="user-icon">
+              <img src="{% static 'images/default_icon.png/' %}" class="user-icon">
             </div>
             {% endif %}
             <!-- if文で、アイコンがない場合のデフォルトアイコンの表示追加 -->
