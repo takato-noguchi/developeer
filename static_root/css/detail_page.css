@@ -1,0 +1,39 @@
+/* CourseDetail */
+.back-course {
+    text-decoration: none;
+}
+
+.back-course:hover {
+    text-decoration: underline;
+}
+
+.btn-sm {
+  margin-top: 60px;
+}
+
+/* ProjectDetail */
+.dev-flow {
+  margin-top: 30px;
+}
+
+.back-project {
+    text-decoration: none;
+}
+
+.back-project {
+  margin-top: 100px;
+}
+
+.back-project:hover {
+    text-decoration: underline;
+}
+
+.comment-form {
+  margin-top: 10px;
+}
+
+.dev-content {
+  margin-bottom: 10px;
+}
+
+
