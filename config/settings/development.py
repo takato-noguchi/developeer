@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'channels',
     "bootstrap4",
     'storages',
+    'storages'
 ]
 
 MIDDLEWARE = [
