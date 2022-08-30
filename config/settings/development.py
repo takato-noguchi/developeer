@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 from telnetlib import LOGOUT
 from django.contrib.messages import constants as messages
+import django_heroku
 
 # BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -158,3 +159,4 @@ LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+django_heroku.settings(locals())
