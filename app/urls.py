@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import ( TopPageView, UserCreateView, CourseView, CourseDetailView, ProjectListView, ProjectDetailView, ProjectStartView, 
-                    ProfileUpdateView, LoginView, LogoutView, AccountView, AccountDeleteView, AccountPasswordView, ProjectAdminView,  CreateCommentView,
-                    ProjectUpdateView, ProjectDeleteView)
+from .views.user import UserCreateView, ProfileUpdateView, LoginView, LogoutView, AccountView, AccountDeleteView, AccountPasswordView
+from .views.course import CourseView, CourseDetailView
+from .views.project import ProjectListView, ProjectDetailView, ProjectStartView, ProjectAdminView,  CreateCommentView, ProjectUpdateView, ProjectDeleteView, TopPageView
+
+app_name = "app"
 
 urlpatterns = [
     path('', TopPageView.as_view(), name='top'),

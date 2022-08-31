@@ -8,13 +8,12 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-
 # チャットルーム表示・作成機能
 class CreateRoomView(LoginRequiredMixin, CreateView):
     template_name = 'projects/projectDetail.html'
     model = ChatRoom
     form_class = CreateRoomForm
-    success_url = reverse_lazy('projectlist')
+    success_url = reverse_lazy('app:projectlist')
 
     # どのプロジェクトに送るか
     def room_create(request):
@@ -48,7 +47,7 @@ class MessageCreateView(LoginRequiredMixin, CreateView):
     # メッセージは、チャットルームで
     template_name = 'chat/room.html'
     form_class = MessageForm
-    success_url = reverse_lazy('projectlist')
+    success_url = reverse_lazy('app:projectlist')
 
     def post(self, request, *args, **kwargs):
         user = request.user

@@ -10,9 +10,9 @@
         <p>
           <a href="https://broadleaf-baroness-77d.notion.site/developeer-f35963e4bf764e5b93084d832af5a595" class="btn btn-primary my-2">developeerとは</a>
           {% if user.is_authenticated %}
-          <a href="{% url 'projectlist' %}" class="btn btn-secondary my-2">開発プロジェクトをさがす</a>
+          <a href="{% url 'app:projectlist' %}" class="btn btn-secondary my-2">開発プロジェクトをさがす</a>
           {% else %}
-          <a href="{% url 'signup' %}" class="btn btn-secondary my-2">アカウントを作成</a>
+          <a href="{% url 'app:signup' %}" class="btn btn-secondary my-2">アカウントを作成</a>
           {% endif %}
         </p>
       </div>
@@ -124,11 +124,11 @@
           <h3 class="fw-light">developeerを使って、チーム開発を始めましょう</h3>
           {% if user.is_authenticated %}
           <p>
-            <a href="{% url 'readyfor' %}" class="btn btn-primary my-2">チーム開発をはじめる</a>
+            <a href="{% url 'app:readyfor' %}" class="btn btn-primary my-2">チーム開発をはじめる</a>
           </p>
           {% else %}
           <p>
-            <a href="{% url 'signup' %}" class="btn btn-primary my-2">アカウントを作成する</a>
+            <a href="{% url 'app:signup' %}" class="btn btn-primary my-2">アカウントを作成する</a>
           </p>
           {% endif %}
         </div>

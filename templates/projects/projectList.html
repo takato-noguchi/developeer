@@ -19,7 +19,7 @@
         開発プロジェクト一覧
       </h1>
       <p class="lead text-muted">各言語・フレームワークを使った、チーム開発のプロジェクトがあります。チーム開発のプロジェクトに参加してみましょう。自分で始めることも可能です。</p>
-      <a href="{% url 'readyfor' %}" class="btn btn-primary my-2">プロジェクトをはじめる</a>
+      <a href="{% url 'app:readyfor' %}" class="btn btn-primary my-2">プロジェクトをはじめる</a>
     </div>
   </div>
 </section>
@@ -43,7 +43,7 @@
               {% endif %}
               <p class="card-text">{{ item.title }}</p>
               <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{% url 'project' item.pk %}">
+                <a href="{% url 'app:project' item.pk %}">
                   <button type="button" class="btn btn-primary">
                     詳しく見る
                   </button>

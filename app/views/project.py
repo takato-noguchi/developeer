@@ -1,64 +1,15 @@
-from distutils.errors import CompileError
-from pyexpat import model
-from re import template
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView, TemplateView
-from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Course, User, Comment, Plan
+from ..models import Comment, Plan
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth import login
-from django.http import HttpResponseRedirect
-from .forms import SignUpForm, LoginForm, ProfileEditForm, ProjectCreateForm, CommentForm, ProjectUpdateForm
+from ..forms import ProjectCreateForm, CommentForm, ProjectUpdateForm
 from chat.forms import CreateRoomForm
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.generic import TemplateView
 
 class TopPageView(TemplateView):
     template_name = "top.html"
-
-class UserCreateView(CreateView):
-    form_class = SignUpForm
-    template_name = "accounts/signup.html"
-    success_url = reverse_lazy("top")
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        self.object = user 
-        return HttpResponseRedirect("top")
-
-    def form_valid(self, form):
-        messages.success(self.request, "新規アカウントが作成されました")
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "新規アカウントが作成できませんでした")
-        return super().form_invalid(form)
-
-class LoginView(LoginView):
-    form_class = LoginForm
-    template_name = "accounts/login.html"
-    model = User
-
-    def form_valid(self, form):
-        messages.success(self.request, "ログインしました")
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "ログインできませんでした")
-        return super().form_invalid(form)
-
-class Logout(LoginRequiredMixin, LogoutView):
-    template_name = 'accounts/login.html'
-
-class CourseView(ListView):
-    template_name = 'courses/course.html'
-    model = Course
-
-class CourseDetailView(DetailView):
-    template_name = 'courses/courseDetail.html'
-    model = Course
 
 class ProjectListView(ListView):
     template_name = 'projects/projectList.html'
@@ -91,25 +42,11 @@ class ProjectDetailView(DetailView):
         context['CreateRoomForm'] = CreateRoomForm(initial={'plan': self.object})
         return context
 
-class ProfileUpdateView(UpdateView):
-    form_class = ProfileEditForm
-    template_name = 'accounts/profile.html'
-    model = User
-    success_url = reverse_lazy('top')
-
-    def form_valid(self, form):
-        messages.success(self.request, "プロフィールを更新しました")
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "プロフィールが更新できませんでした")
-        return super().form_invalid(form)
-
 class ProjectStartView(LoginRequiredMixin, CreateView):
     form_class = ProjectCreateForm
     template_name = 'projects/project.html'
     model = Plan
-    success_url = reverse_lazy('projectlist')
+    success_url = reverse_lazy('app:projectlist')
 
     def post(self, request, *args, **kwargs):
         user = request.user
@@ -129,35 +66,6 @@ class ProjectStartView(LoginRequiredMixin, CreateView):
     def form_invalid(self, form):
         messages.error(self.request, "プロジェクトを作成できませんでした")
         return super().form_invalid(form)
-
-# プロフィール削除
-class AccountDeleteView(DeleteView):
-    template_name = 'accounts/account.html'
-    model = User
-    success_url = reverse_lazy('top')
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
-
-# アカウント表示
-class AccountView(ListView):
-    template_name = 'accounts/account.html'
-    model = User
-
-# アカウント削除
-class AccountDeleteView(DeleteView):
-    template_name = 'accounts/accountDelete.html'
-    model = User
-    success_url = reverse_lazy('top')
-
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, "アカウントを削除しました")
-        return super().delete(request, *args, **kwargs)
-
-# パスワード変更
-class AccountPasswordView(UpdateView):
-    template_name = 'accounts/account.html'
-    model = User
 
 # プロジェクト管理
 class ProjectAdminView(ListView):
@@ -183,25 +91,24 @@ class ProjectUpdateView(UpdateView):
     template_name = 'projects/projectUpdate.html'
     model = Plan
     form_class = ProjectUpdateForm
-    success_url = reverse_lazy('projectadmin')
+    success_url = reverse_lazy('app:projectadmin')
 
 # プロジェクトの削除
 class ProjectDeleteView(DeleteView):
     template_name = 'projects/projectDelete.html'
     model = Plan
-    success_url = reverse_lazy("projectadmin")
+    success_url = reverse_lazy("app:projectadmin")
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, "プロジェクトを削除しました")
         return super().delete(request, *args, **kwargs)
-
 
 # コメント投稿
 class CreateCommentView(CreateView):
     form_class = CommentForm
     template_name = 'projects/projectDetail.html'
     model = Comment
-    success_url = reverse_lazy('projectlist')
+    success_url = reverse_lazy('app:projectlist')
 
     # プロジェクトの指定
     def comment_create(request):
@@ -232,4 +139,4 @@ class CreateCommentView(CreateView):
             return self.form_invalid(form)
 
     def get_url_success(self):
-        return reverse_lazy("project",kwargs={"pk":self.kwargs["pk"]})
+        return reverse_lazy("app:project",kwargs={"pk":self.kwargs["pk"]})

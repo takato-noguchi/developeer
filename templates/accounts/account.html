@@ -18,7 +18,7 @@
         <div>
           <h3>アカウントの削除</h3>
           <p>以下のボタンからアカウントの削除をすることができます。</p>
-          <a href="{%url 'accountDelete' user.pk %}" class="btn btn-danger">
+          <a href="{%url 'app:accountDelete' user.pk %}" class="btn btn-danger">
               削除する
           </a>
         </div>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <a href="{% url 'top'%}" class="btn btn-secondary btn-sm">戻る</a>
+    <a href="{% url 'app:top'%}" class="btn btn-secondary btn-sm">戻る</a>
   </div>
 </body>
 </html>
