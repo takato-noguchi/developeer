@@ -76,7 +76,7 @@
               <img src="{{ user.img.url }}" class="user-icon">
               {% else %}
               <a href="{% url 'projectadmin' %}" class="btn btn-primary my-2 my-sm-0" >自分のプロジェクト</a>
-              <img src="{% static 'images/default_icon.png/' %}" class="user-icon">
+              <img src="{% static '/images/default_icon.png/' %}" class="user-icon">
               {% endif %}
             </div>
             <div class="menu">
@@ -100,7 +100,7 @@
           <a href="{% url 'login' %}" class="btn btn-primary my-2 my-sm-0" >ログイン</a>
           <a href="{% url 'signup' %}" class="btn btn-primary my-2 my-sm-0" >新規登録</a>
           </form>
-          <img src="{% static 'images/default_icon.png/' %}" class="user-icon">
+          <img src="{% static '/images/default_icon.png/' %}" class="user-icon">
           {% endif %}
       </div>
     </div>
