@@ -1,6 +1,6 @@
 ## チーム開発のためのマッチングプラットフォーム「developeer」
 
-__アプリケーションURL：__ 
+__アプリケーションURL：__ https://developeer-match.herokuapp.com/
 
 ## アプリケーション構成図
 
