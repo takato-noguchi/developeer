@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from common.error_log import server_error_display
+import debug_toolbar
 
 handler500 = server_error_display
 
@@ -11,3 +12,6 @@ urlpatterns = [
     path('', include('app.urls')),
     path('chat/', include('chat.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
