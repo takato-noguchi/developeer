@@ -1,6 +1,6 @@
 ## チーム開発のためのマッチングプラットフォーム「developeer」
 
-__アプリケーションURL：__ https://developeer-match.herokuapp.com/
+__アプリケーションURL：__ https://www.developeer.jp/
 
 ## アプリケーション構成図
 
@@ -13,17 +13,22 @@ __アプリケーションURL：__ https://developeer-match.herokuapp.com/
 $ git clone https://github.com/tn-528hz/developeer.git
 ```
 
-2. Install Python Library
+2. Change Directory
+```bash
+$ cd developeer
+```
+
+3. Install Python Library
 ```bash
 $ pip install -r requirements.txt
 ```
 
-3. Runserver your localhost
+4. Runserver your localhost
 ```bash
 $ python manage.py runserver
 ```
 
-4. Access URL
+5. Access URL
 ```
 http://localhost:8000
 ```
